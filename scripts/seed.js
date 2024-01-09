@@ -44,45 +44,50 @@ async function seedUsers(client) {
   }
 }
 
-// async function seedInvoices(client) {
-//   try {
-//     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+async function seedSharingPosts(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-//     // Create the "invoices" table if it doesn't exist
-//     const createTable = await client.sql`
-//     CREATE TABLE IF NOT EXISTS invoices (
-//     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-//     customer_id UUID NOT NULL,
-//     amount INT NOT NULL,
-//     status VARCHAR(255) NOT NULL,
-//     date DATE NOT NULL
-//   );
-// `;
+    // Create the "invoices" table if it doesn't exist
+    const createTable = await client.sql`
+    CREATE TABLE IF NOT EXISTS sharingposts (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    creator_id UUID NOT NULL,
+    creation_date DATE NOT NULL,
+    company VARCHAR(255),
+    interview_status VARCHAR(255),
+    interview_type VARCHAR(255),
+    title VARCHAR(255),
+    content TEXT,
+    likes INT,
+    views INT
+  );
+`;
 
-//     console.log(`Created "invoices" table`);
+    console.log(`Created "sharingposts" table`);
 
-//     // Insert data into the "invoices" table
-//     const insertedInvoices = await Promise.all(
-//       invoices.map(
-//         (invoice) => client.sql`
-//         INSERT INTO invoices (customer_id, amount, status, date)
-//         VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
-//         ON CONFLICT (id) DO NOTHING;
-//       `,
-//       ),
-//     );
+    // Insert data into the "invoices" table
+    const insertedSharingposts = await Promise.all(
+      sharingposts.map(
+        (post) => client.sql`
+        INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)
+        VALUES (${post.creator_id}, ${post.creation_date}, ${post.company}, ${post.interview_status}, ${post.interview_type}, ${post.title}, ${post.content}, ${post.likes}, ${post.views})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+      ),
+    );
 
-//     console.log(`Seeded ${insertedInvoices.length} invoices`);
+    console.log(`Seeded ${insertedSharingposts.length} posts`);
 
-//     return {
-//       createTable,
-//       invoices: insertedInvoices,
-//     };
-//   } catch (error) {
-//     console.error('Error seeding invoices:', error);
-//     throw error;
-//   }
-// }
+    return {
+      createTable,
+      sharingposts: insertedSharingposts,
+    };
+  } catch (error) {
+    console.error('Error seeding sharingposts:', error);
+    throw error;
+  }
+}
 
 // async function seedCustomers(client) {
 //   try {
@@ -162,6 +167,7 @@ async function main() {
   const client = await db.connect();
 
   await seedUsers(client);
+  await seedSharingPosts(client);
 //   await seedCustomers(client);
 //   await seedInvoices(client);
 //   await seedRevenue(client);

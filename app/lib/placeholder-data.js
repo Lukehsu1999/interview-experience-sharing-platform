@@ -254,6 +254,7 @@ const sharingposts = [
 
 module.exports = {
   users,
+  sharingposts,
   // users,
   // invoices,
   // revenue,
