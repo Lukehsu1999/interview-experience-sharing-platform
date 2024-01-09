@@ -71,7 +71,7 @@ const users = [
 
 const sharingposts = [
   {
-    creator_id: customers[0].id,
+    creator_id: users[0].id,
     creation_date: '2023-06-01',
     company: 'Amazon',
     interview_status: 'Phone interview',
@@ -82,7 +82,7 @@ const sharingposts = [
     views: 20,
   },
   {
-    creator_id: customers[1].id,
+    creator_id: users[1].id,
     creation_date: '2023-07-01',
     company: 'Amazon',
     interview_status: 'Online Assessment',
@@ -93,7 +93,7 @@ const sharingposts = [
     views: 30,
   },
   {
-    creator_id: customers[2].id,
+    creator_id: users[2].id,
     creation_date: '2023-08-01',
     company: 'American Express',
     interview_status: 'Final Round',
@@ -104,7 +104,7 @@ const sharingposts = [
     views: 68,
   },
   {
-    creator_id: customers[3].id,
+    creator_id: users[3].id,
     creation_date: '2023-09-01',
     company: 'American Express',
     interview_status: 'First Round',
@@ -115,7 +115,7 @@ const sharingposts = [
     views: 16,
   },
   {
-    creator_id: customers[4].id,
+    creator_id: users[4].id,
     creation_date: '2023-10-01',
     company: 'Boston Dynamics',
     interview_status: 'Second Round',
@@ -126,7 +126,7 @@ const sharingposts = [
     views: 46,
   },
   {
-    creator_id: customers[5].id,
+    creator_id: users[5].id,
     creation_date: '2023-11-01',
     company: 'BCG',
     interview_status: 'First Round',
@@ -137,7 +137,7 @@ const sharingposts = [
     views: 35,
   },
   {
-    creator_id: customers[6].id,
+    creator_id: users[6].id,
     creation_date: '2023-12-01',
     company: 'Cadence',
     interview_status: 'Rejected',
@@ -148,7 +148,7 @@ const sharingposts = [
     views: 20,
   },
   {
-    creator_id: customers[7].id,
+    creator_id: users[7].id,
     creation_date: '2023-06-15',
     company: 'Deloitte',
     interview_status: 'Offered',
@@ -159,7 +159,7 @@ const sharingposts = [
     views: 50,
   },
   {
-    creator_id: customers[8].id,
+    creator_id: users[8].id,
     creation_date: '2023-07-15',
     company: 'EY',
     interview_status: 'First Round',
@@ -170,7 +170,7 @@ const sharingposts = [
     views: 50,
   },
   {
-    creator_id: customers[9].id,
+    creator_id: users[9].id,
     creation_date: '2023-08-15',
     company: 'Facebook',
     interview_status: 'Online Assessment',
@@ -181,7 +181,7 @@ const sharingposts = [
     views: 50,
   },
   {
-    creator_id: customers[2].id,
+    creator_id: users[2].id,
     creation_date: '2023-09-15',
     company: 'Google',
     interview_status: 'First Round',
@@ -192,7 +192,7 @@ const sharingposts = [
     views: 40,
   },
   {
-    creator_id: customers[3].id,
+    creator_id: users[3].id,
     creation_date: '2023-10-15',
     company: 'Google',
     interview_status: 'Final Round',
@@ -203,7 +203,7 @@ const sharingposts = [
     views: 100,
   },
   {
-    creator_id: customers[4].id,
+    creator_id: users[4].id,
     creation_date: '2023-11-15',
     company: 'JP Morgan',
     interview_status: 'Second Round',
@@ -214,7 +214,7 @@ const sharingposts = [
     views: 50,
   },
   {
-    creator_id: customers[5].id,
+    creator_id: users[5].id,
     creation_date: '2023-12-15',
     company: 'IBM',
     interview_status: 'Second Round',
@@ -225,7 +225,7 @@ const sharingposts = [
     views: 40,
   },
   {
-    creator_id: customers[6].id,
+    creator_id: users[6].id,
     creation_date: '2023-12-25',
     company: 'Santa Claus',
     interview_status: 'Others',
@@ -254,7 +254,7 @@ const sharingposts = [
 
 module.exports = {
   users,
-  // customers,
+  // users,
   // invoices,
   // revenue,
 };
