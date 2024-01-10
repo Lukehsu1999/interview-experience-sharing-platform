@@ -27,24 +27,14 @@ export default async function InvoicesTable({
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
-                      {/* <Image
-                        src={invoice.image_url}
-                        className="mr-2 rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      /> */}
                       <p>{post.name}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{post.email}</p>
+                    <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    {/* <p className="text-xl font-medium">
-                      {formatCurrency(invoice.amount)}
-                    </p>  */}
                     <p className="text-xl font-medium">
                       {post.title}
                     </p> 
@@ -61,20 +51,32 @@ export default async function InvoicesTable({
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Customer
+                {/* <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Creator
+                </th> */}
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Company
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Amount
+                  Title
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Type
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Creator
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Views
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Likes
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -87,20 +89,13 @@ export default async function InvoicesTable({
                   key={post.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                  {/* <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      {/* <Image
-                        src={invoice.image_url}
-                        className="rounded-full"
-                        width={28}
-                        height={28}
-                        alt={`${invoice.name}'s profile picture`}
-                      /> */}
                       <p>{post.name}</p>
                     </div>
-                  </td>
+                  </td> */}
                   <td className="whitespace-nowrap px-3 py-3">
-                    {post.email}
+                    {post.company}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {post.title} 
@@ -109,9 +104,28 @@ export default async function InvoicesTable({
                     {formatDateToLocal(post.creation_date)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {/* <InvoiceStatus status={invoice.status} /> */}
                     <p>
                       {post.interview_status}
+                    </p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>
+                      {post.interview_type}
+                    </p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>
+                      {post.name}
+                    </p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>
+                      {post.views}
+                    </p>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <p>
+                      {post.likes}
                     </p>
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
