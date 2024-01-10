@@ -22,6 +22,21 @@ export type SharingPost = {
   views: number;
 };
 
+export type PostsTable = {
+  id: string;
+  creator_id: string;
+  creation_date: string;
+  company: string;
+  interview_status: 'Phone interview' | 'Online Assessment' | 'First Round' | 'Second Round' | 'Third Round' | 'Final Round' | 'Rejected' | 'Offered' | 'Others';
+  interview_type: 'Technical Interview' | 'Behavioral Interview' | 'Case Interview' | 'Others';
+  title: string;
+  content: string;
+  likes: number;
+  views: number;
+  name: string;
+  email: string;
+};
+
 // From Invoices Project
 export type Customer = {
   id: string;
