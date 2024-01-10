@@ -7,6 +7,7 @@ import {
   LatestInvoiceRaw,
   User,
   Revenue,
+  PostsTable,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -87,39 +88,82 @@ export async function fetchCardData() {
   }
 }
 
+// const ITEMS_PER_PAGE = 6;
+// export async function fetchFilteredInvoices(
+//   query: string,
+//   currentPage: number,
+// ) {
+//   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+//   try {
+//     const invoices = await sql<InvoicesTable>`
+//       SELECT
+//         invoices.id,
+//         invoices.amount,
+//         invoices.date,
+//         invoices.status,
+//         customers.name,
+//         customers.email,
+//         customers.image_url
+//       FROM invoices
+//       JOIN customers ON invoices.customer_id = customers.id
+//       WHERE
+//         customers.name ILIKE ${`%${query}%`} OR
+//         customers.email ILIKE ${`%${query}%`} OR
+//         invoices.amount::text ILIKE ${`%${query}%`} OR
+//         invoices.date::text ILIKE ${`%${query}%`} OR
+//         invoices.status ILIKE ${`%${query}%`}
+//       ORDER BY invoices.date DESC
+//       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+//     `;
+
+//     return invoices.rows;
+//   } catch (error) {
+//     console.error('Database Error:', error);
+//     throw new Error('Failed to fetch invoices.');
+//   }
+// }
+
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
+export async function fetchFilteredPosts(
   query: string,
   currentPage: number,
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
+  console.log(query);
   try {
-    const invoices = await sql<InvoicesTable>`
+    const posts = await sql<PostsTable>`
       SELECT
-        invoices.id,
-        invoices.amount,
-        invoices.date,
-        invoices.status,
-        customers.name,
-        customers.email,
-        customers.image_url
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
+        sharingposts.id,
+        sharingposts.creator_id,
+        sharingposts.creation_date,
+        sharingposts.company,
+        sharingposts.interview_status,
+        sharingposts.interview_type,
+        sharingposts.title,
+        sharingposts.content,
+        sharingposts.likes,
+        sharingposts.views,
+        users.name,
+        users.email
+      FROM sharingposts
+      JOIN users ON sharingposts.creator_id = users.id
       WHERE
-        customers.name ILIKE ${`%${query}%`} OR
-        customers.email ILIKE ${`%${query}%`} OR
-        invoices.amount::text ILIKE ${`%${query}%`} OR
-        invoices.date::text ILIKE ${`%${query}%`} OR
-        invoices.status ILIKE ${`%${query}%`}
-      ORDER BY invoices.date DESC
+        sharingposts.company ILIKE ${`%${query}%`} OR
+        sharingposts.interview_status ILIKE ${`%${query}%`} OR
+        sharingposts.interview_type ILIKE ${`%${query}%`} OR
+        sharingposts.title ILIKE ${`%${query}%`} OR
+        sharingposts.content ILIKE ${`%${query}%`} OR
+        users.name ILIKE ${`%${query}%`} OR
+        users.email ILIKE ${`%${query}%`}
+      ORDER BY sharingposts.creation_date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
 
-    return invoices.rows;
+    return posts.rows;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    throw new Error('Failed to fetch posts.');
   }
 }
 
