@@ -155,6 +155,7 @@ export async function fetchFilteredPosts(
       FROM sharingposts
       JOIN users ON sharingposts.creator_id = users.id
       WHERE
+        sharingposts.creation_date::text ILIKE ${`%${query}%`} OR
         sharingposts.company ILIKE ${`%${query}%`} OR
         sharingposts.interview_status ILIKE ${`%${query}%`} OR
         sharingposts.interview_type ILIKE ${`%${query}%`} OR
@@ -170,6 +171,35 @@ export async function fetchFilteredPosts(
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch posts.');
+  }
+}
+
+export async function fetchPostsPages(
+  query: string
+) {
+  noStore();
+  try {
+    const count = await sql`
+      SELECT
+        COUNT(*)
+      FROM sharingposts
+      JOIN users ON sharingposts.creator_id = users.id
+      WHERE
+        sharingposts.creation_date::text ILIKE ${`%${query}%`} OR
+        sharingposts.company ILIKE ${`%${query}%`} OR
+        sharingposts.interview_status ILIKE ${`%${query}%`} OR
+        sharingposts.interview_type ILIKE ${`%${query}%`} OR
+        sharingposts.title ILIKE ${`%${query}%`} OR
+        sharingposts.content ILIKE ${`%${query}%`} OR
+        users.name ILIKE ${`%${query}%`} OR
+        users.email ILIKE ${`%${query}%`}
+    `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the total number of posts.');
   }
 }
 
