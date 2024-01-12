@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
+import { ViewPost } from '@/app/ui/posts/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredPosts } from '@/app/lib/data';
@@ -41,8 +41,7 @@ export default async function InvoicesTable({
                     <p>{formatDateToLocal(post.creation_date)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateInvoice id={post.id} />
-                    <DeleteInvoice id={post.id} />
+                    <ViewPost id={post.id} />
                   </div>
                 </div>
               </div>
@@ -125,8 +124,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateInvoice id={post.id} />
-                      <DeleteInvoice id={post.id} />
+                      <ViewPost id={post.id} />
                     </div>
                   </td>
                 </tr>

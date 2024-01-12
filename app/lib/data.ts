@@ -130,10 +130,7 @@ export async function fetchFilteredInvoices(
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredPosts(
-  query: string,
-  currentPage: number,
-) {
+export async function fetchFilteredPosts(query: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   console.log(query);
@@ -174,9 +171,7 @@ export async function fetchFilteredPosts(
   }
 }
 
-export async function fetchPostsPages(
-  query: string
-) {
+export async function fetchPostsPages(query: string) {
   noStore();
   try {
     const count = await sql`
@@ -248,6 +243,39 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchPostById(id: string) {
+  noStore();
+  try {
+    const data = await sql<PostsTable>`
+    SELECT
+      sharingposts.id,
+      sharingposts.creator_id,
+      sharingposts.creation_date,
+      sharingposts.company,
+      sharingposts.interview_status,
+      sharingposts.interview_type,
+      sharingposts.title,
+      sharingposts.content,
+      sharingposts.likes,
+      sharingposts.views,
+      users.name,
+      users.email
+    FROM sharingposts
+    JOIN users ON sharingposts.creator_id = users.id
+    WHERE sharingposts.id = ${id};
+    `;
+
+    const post = data.rows.map((post) => ({
+      ...post,
+    }));
+
+    return post[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch post by Id.');
   }
 }
 
