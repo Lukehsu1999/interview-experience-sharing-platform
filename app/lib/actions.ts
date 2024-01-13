@@ -133,6 +133,7 @@ export async function createUser(
       ON CONFLICT (id) DO NOTHING;
     `;
     console.log(`Insert users`);
+    return 'Success! User created, please login';
   } catch (error: any) {
     if (error instanceof Error) {
       console.error('Username or email already exists');
