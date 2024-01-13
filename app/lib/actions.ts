@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+const bcrypt = require('bcrypt');
 
 const FormSchema = z.object({
   id: z.string(),
@@ -90,19 +91,39 @@ export async function authenticate(
   }
 }
 
-export async function createUser(prevState: string | undefined, formData: FormData) {
+export async function createUser(
+  prevState: string | undefined,
+  formData: FormData,
+) {
   try {
     console.log(formData);
+    const { name, email, password } = {
+      name: String(formData.get('name')),
+      email: String(formData.get('email')),
+      password: String(formData.get('password')),
+    };
+    //check if name and email already exist in database
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // const insert_result = await sql`
+    //   INSERT INTO users (name, email, password)
+    //   VALUES (${name}, ${email}, ${hashedPassword})
+    //   ON CONFLICT (name, email)
+    //   DO NOTHING
+    //   RETURNING *;
+    // `;
+    console.log("testing")
+    console.log(name);
+    console.log()
+    // 
+    const searchDuplicate = await sql`
+      SELECT COUNT(*)
+      FROM users
+      WHERE users.name = ${name} OR users.email = ${email};
+    `;
+    console.log(searchDuplicate.rows[0].count);
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
-    throw error;
+    console.log("Username or email already exists")
+    return error;
   }
   // const {
   //   creator_id,
