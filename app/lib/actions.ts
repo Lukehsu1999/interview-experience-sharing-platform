@@ -112,7 +112,7 @@ export async function createUser(
     `;
     const nameDupCnt = searchNameDuplicate.rows[0].count;
     if (nameDupCnt >= 1) {
-      console.log("Name already exists");
+      console.log('Name already exists');
       throw new Error('Name already exists');
     }
     // check email
@@ -123,16 +123,23 @@ export async function createUser(
     `;
     const emailDupCnt = searchEmailDuplicate.rows[0].count;
     if (emailDupCnt >= 1) {
-      console.log("Email already exist")
+      console.log('Email already exist');
       throw new Error('Email already exists');
     }
+    // can insert now if no duplicate name/email
+    const insertionRes = sql`
+      INSERT INTO users (name, email, password)
+      VALUES (${name}, ${email}, ${hashedPassword})
+      ON CONFLICT (id) DO NOTHING;
+    `;
+    console.log(`Insert users`);
   } catch (error: any) {
     if (error instanceof Error) {
       console.error('Username or email already exists');
       return error.message;
     } else {
-      console.error('An unknown error occurred');
-      return 'An unknown error occurred';
+      console.error('Insert into Database error');
+      return 'Database Insertion error';
     }
   }
 }
