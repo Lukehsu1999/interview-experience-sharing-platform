@@ -19,9 +19,12 @@ export default function Display({ post }: { post: PostsTable }) {
   return (
     <div>
       <h2>{post.title}</h2>
-      {contentLines.map((line, index) => (
+      {/* {contentLines.map((line, index) => (
         <p key={index}>{line}</p>
-      ))}
+      ))} */}
+      <textarea
+        value={post.content}>
+      </textarea>
       <p>Creator: {post.name}</p>
       <p>Email: {post.email}</p>
       <p>Company: {post.company}</p>
