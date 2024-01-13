@@ -104,51 +104,35 @@ export async function createUser(
     };
     //check if name and email already exist in database
     const hashedPassword = await bcrypt.hash(password, 10);
-    // const insert_result = await sql`
-    //   INSERT INTO users (name, email, password)
-    //   VALUES (${name}, ${email}, ${hashedPassword})
-    //   ON CONFLICT (name, email)
-    //   DO NOTHING
-    //   RETURNING *;
-    // `;
-    console.log("testing")
-    console.log(name);
-    console.log()
-    // 
-    const searchDuplicate = await sql`
+    // check name duplicate
+    const searchNameDuplicate = await sql`
       SELECT COUNT(*)
       FROM users
-      WHERE users.name = ${name} OR users.email = ${email};
+      WHERE users.name = ${name};
     `;
-    console.log(searchDuplicate.rows[0].count);
-  } catch (error) {
-    console.log("Username or email already exists")
-    return error;
+    const nameDupCnt = searchNameDuplicate.rows[0].count;
+    if (nameDupCnt >= 1) {
+      console.log("Name already exists");
+      throw new Error('Name already exists');
+    }
+    // check email
+    const searchEmailDuplicate = await sql`
+      SELECT COUNT(*)
+      FROM users
+      WHERE users.email = ${email};
+    `;
+    const emailDupCnt = searchEmailDuplicate.rows[0].count;
+    if (emailDupCnt >= 1) {
+      console.log("Email already exist")
+      throw new Error('Email already exists');
+    }
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error('Username or email already exists');
+      return error.message;
+    } else {
+      console.error('An unknown error occurred');
+      return 'An unknown error occurred';
+    }
   }
-  // const {
-  //   creator_id,
-  //   company,
-  //   title,
-  //   interview_status,
-  //   interview_type,
-  //   content,
-  // } = CreatePost.parse({
-  //   creator_id: formData.get('creator_id'),
-  //   company: formData.get('company'),
-  //   title: formData.get('title'),
-  //   interview_status: formData.get('interview_status'),
-  //   interview_type: formData.get('interview_type'),
-  //   content: formData.get('content'),
-  // });
-  // const creation_date = new Date().toISOString().split('T')[0];
-  // const likes = 0;
-  // const views = 0;
-
-  // await sql`
-  //   INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)
-  //   VALUES (${creator_id}, ${creation_date}, ${company}, ${interview_status}, ${interview_type}, ${title}, ${content}, ${likes}, ${views})
-  // `;
-
-  // revalidatePath('/posts');
-  // redirect('/posts');
 }
