@@ -89,3 +89,45 @@ export async function authenticate(
     throw error;
   }
 }
+
+export async function createUser(prevState: string | undefined, formData: FormData) {
+  try {
+    console.log(formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+  // const {
+  //   creator_id,
+  //   company,
+  //   title,
+  //   interview_status,
+  //   interview_type,
+  //   content,
+  // } = CreatePost.parse({
+  //   creator_id: formData.get('creator_id'),
+  //   company: formData.get('company'),
+  //   title: formData.get('title'),
+  //   interview_status: formData.get('interview_status'),
+  //   interview_type: formData.get('interview_type'),
+  //   content: formData.get('content'),
+  // });
+  // const creation_date = new Date().toISOString().split('T')[0];
+  // const likes = 0;
+  // const views = 0;
+
+  // await sql`
+  //   INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)
+  //   VALUES (${creator_id}, ${creation_date}, ${company}, ${interview_status}, ${interview_type}, ${title}, ${content}, ${likes}, ${views})
+  // `;
+
+  // revalidatePath('/posts');
+  // redirect('/posts');
+}
