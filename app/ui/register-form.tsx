@@ -11,6 +11,7 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { createUser } from '@/app/lib/actions';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(createUser, undefined);
@@ -82,6 +83,7 @@ export default function LoginForm() {
           </div>
         </div>
         <RegisterButton />
+        <LoginButton />
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
@@ -108,5 +110,15 @@ function RegisterButton() {
     <Button className="mt-4 w-full" aria-disabled={pending}>
       Register <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>
+  );
+}
+
+function LoginButton() {
+  return (
+    <Link href="/login">
+      <Button className="mt-4 w-full">
+        Login <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+      </Button>
+    </Link>
   );
 }

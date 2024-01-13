@@ -1,3 +1,5 @@
+'use client';
+
 import AcmeLogo from '@/app/ui/acme-logo';
 import RegisterForm from '@/app/ui/register-form';
  
