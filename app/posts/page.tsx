@@ -15,6 +15,7 @@ export default async function Page({
     page?: string;
   };
 }) {
+
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPostsPages(query);

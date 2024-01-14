@@ -11,6 +11,9 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
+  //const loggedIn = localStorage.getItem('isloggedIn');
+  console.log('logged in');
+  //console.log(loggedIn);
   const posts = await fetchFilteredPosts(query, currentPage);
   console.log(posts);
 
@@ -35,9 +38,7 @@ export default async function InvoicesTable({
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
-                      {post.title}
-                    </p> 
+                    <p className="text-xl font-medium">{post.title}</p>
                     <p>{formatDateToLocal(post.creation_date)}</p>
                   </div>
                   <div className="flex justify-end gap-2">
@@ -91,36 +92,24 @@ export default async function InvoicesTable({
                   <td className="whitespace-nowrap px-3 py-3">
                     {post.company}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {post.title} 
-                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">{post.title}</td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(post.creation_date)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>
-                      {post.interview_status}
-                    </p>
+                    <p>{post.interview_status}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>
-                      {post.interview_type}
-                    </p>
+                    <p>{post.interview_type}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>
-                      {post.name}
-                    </p>
+                    <p>{post.name}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>
-                      {post.views}
-                    </p>
+                    <p>{post.views}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>
-                      {post.likes}
-                    </p>
+                    <p>{post.likes}</p>
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

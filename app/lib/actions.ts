@@ -1,6 +1,6 @@
 'use server';
 
-import { z } from 'zod';
+import { number, z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -151,21 +151,27 @@ export async function addLike(
   liker_id: string,
 ) {
   try {
+    console.log(post_id, liker_id);
     const likeCnt = await sql`
-    SELECT COUNT(*)
-    FROM likes
-    WHERE post_id = ${post_id} AND liker_id = ${liker_id};
-  `;
-    const likeCntNum = likeCnt.rows[0].count;
+      SELECT COUNT(*) AS CNT
+      FROM likes
+      WHERE post_id = ${post_id} AND liker_id = ${liker_id};
+      -- WHERE post_id = '8185decf-19fe-414f-92ec-14ea012c9ea0' AND liker_id = '410544b2-4001-4271-9855-fec4b6a6442a';
+    `;
+    console.log(likeCnt);
+    const likeCntNum: number = likeCnt.rows[0].cnt as number;
+    console.log(likeCntNum);
     if (likeCntNum >= 1) {
       console.log('Already liked');
       throw new Error('Already liked');
     }
     if (likeCntNum == 0) {
       const insertLike = await sql`
-      INSERT INTO likes (post_id, creator_id, liker_id)
-      VALUES (${post_id}, ${creator_id}, ${liker_id});
-    `;
+        INSERT INTO likes (post_id, creator_id, liker_id)
+        VALUES (${post_id}, ${creator_id}, ${liker_id});
+      `;
+      console.log(`Insert likes`);
+      return 'Success! Like added';
     }
   } catch (error: any) {
     if (error instanceof Error) {

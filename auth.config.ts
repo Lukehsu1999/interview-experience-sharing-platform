@@ -1,3 +1,6 @@
+/*
+ config file: set up the page logic
+*/
 import type { NextAuthConfig } from 'next-auth';
  
 export const authConfig = {
@@ -8,6 +11,8 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
+      console.log('isLoggedIn', isLoggedIn);
+      console.log(auth);
       const isOnPosts = nextUrl.pathname.startsWith('/posts');
       if (isOnPosts) {
         if (isLoggedIn) return true;
@@ -17,6 +22,10 @@ export const authConfig = {
       }
       return true;
     },
+    // async session({ session, user }) {
+    //   session.user = user;
+    //   return session;
+    // }
 
   },
   providers: [], // Add providers with an empty array for now
