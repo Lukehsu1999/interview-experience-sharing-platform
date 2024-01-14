@@ -353,3 +353,14 @@ export async function getUser(email: string) {
     throw new Error('Failed to fetch user.');
   }
 }
+
+export async function fetchUserIdByNameEmail(name: string, email: string) {
+  noStore();
+  try {
+    const user = await sql`SELECT id FROM users WHERE name=${name} AND email=${email}`;
+    return String(user.rows[0].id);
+  } catch (error) {
+    console.error('Failed to fetch user id by name and email:', error);
+    throw new Error('Failed to fetch user id.');
+  }
+}

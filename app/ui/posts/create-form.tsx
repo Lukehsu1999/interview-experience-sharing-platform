@@ -8,18 +8,22 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { createPost } from '@/app/lib/actions';
+interface FormProps {
+  userId: string;
+}
 
-export default function Form() {
+export default function Form({userId}: FormProps) {
+  console.log("Form userId: ", userId, "userId type: ", typeof userId);
   return (
     <form action={createPost}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* put input here*/}
         {/* Enter creator_id, will be hidden later */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Enter creator id, hidden later
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium hidden">
+            (hidden) Enter creator id, hidden later
           </label>
-          <div className="relative mt-2 rounded-md">
+          <div className="relative mt-2 rounded-md hidden">
             <div className="relative">
               <input
                 id="creator_id"
@@ -27,6 +31,7 @@ export default function Form() {
                 type="text"
                 placeholder="Enter your id here"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                value={userId}
               />
             </div>
           </div>

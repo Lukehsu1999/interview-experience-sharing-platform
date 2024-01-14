@@ -62,6 +62,7 @@ export async function createPost(formData: FormData) {
   const creation_date = new Date().toISOString().split('T')[0];
   const likes = 0;
   const views = 0;
+  console.log("createPost: ", creator_id, " type of creator_id", typeof creator_id);
 
   await sql`
     INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)

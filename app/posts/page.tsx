@@ -5,9 +5,8 @@ import { CreatePost } from '@/app/ui/posts/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
-import { fetchPostsPages } from '@/app/lib/data';
-import { auth } from '@/auth';
-import { createSearchParamsBailoutProxy } from 'next/dist/client/components/searchparams-bailout-proxy';
+import { fetchUserIdByNameEmail, fetchPostsPages } from '@/app/lib/data';
+import { auth, signIn } from '@/auth';
 
 export default async function Page({
   searchParams,
@@ -17,8 +16,16 @@ export default async function Page({
     page?: string;
   };
 }) {
+  // get user id
   const user = await auth();
-  console.log("landing posts page user: ",user);
+  const userName = user?.user?.name;
+  const userEmail = user?.user?.email;
+  if (userName === undefined || userEmail === undefined) {
+    signIn();
+  } 
+  const userId = await fetchUserIdByNameEmail(String(userName), String(userEmail));
+
+  // get query params
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPostsPages(query);
