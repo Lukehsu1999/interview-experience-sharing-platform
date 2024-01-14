@@ -6,6 +6,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchPostsPages } from '@/app/lib/data';
+import { auth } from '@/auth';
 
 export default async function Page({
   searchParams,
@@ -15,7 +16,9 @@ export default async function Page({
     page?: string;
   };
 }) {
-
+  const user = await auth();
+  console.log("landing posts page");
+  console.log(user);
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPostsPages(query);

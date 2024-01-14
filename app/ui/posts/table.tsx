@@ -15,7 +15,7 @@ export default async function InvoicesTable({
   console.log('logged in');
   //console.log(loggedIn);
   const posts = await fetchFilteredPosts(query, currentPage);
-  console.log(posts);
+  //console.log(posts);
 
   return (
     <div className="mt-6 flow-root">
