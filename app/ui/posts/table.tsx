@@ -11,12 +11,7 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
-  //const loggedIn = localStorage.getItem('isloggedIn');
-  console.log('logged in');
-  //console.log(loggedIn);
   const posts = await fetchFilteredPosts(query, currentPage);
-  //console.log(posts);
-
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">

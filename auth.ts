@@ -30,10 +30,8 @@ export const { auth, signIn, signOut } = NextAuth({
                 const user = await getUser(email);
                 if (!user) return null;
                 const passwordsMatch = await bcrypt.compare(password, user.password);
-
                 if (passwordsMatch){
-                    //localStorage.setItem('user', JSON.stringify(user));
-                    console.log(user);
+                    console.log("auth.ts user: ", user)
                     return user;
                 }
               }

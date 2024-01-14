@@ -7,6 +7,7 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchPostsPages } from '@/app/lib/data';
 import { auth } from '@/auth';
+import { createSearchParamsBailoutProxy } from 'next/dist/client/components/searchparams-bailout-proxy';
 
 export default async function Page({
   searchParams,
@@ -17,8 +18,7 @@ export default async function Page({
   };
 }) {
   const user = await auth();
-  console.log("landing posts page");
-  console.log(user);
+  console.log("landing posts page user: ",user);
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPostsPages(query);
