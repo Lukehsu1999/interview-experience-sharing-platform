@@ -364,3 +364,15 @@ export async function fetchUserIdByNameEmail(name: string, email: string) {
     throw new Error('Failed to fetch user id.');
   }
 }
+
+export async function fetchLikeStatus(postId: string, likerId: string) {
+  noStore();
+  try {
+    const likeStatus = await sql`SELECT COUNT(*) AS CNT FROM likes WHERE post_id=${postId} AND liker_id=${likerId}`;
+    //console.log("likeStatus: ", likeStatus);
+    return likeStatus.rows[0].cnt;
+  } catch (error) {
+    console.error('Failed to fetch like status:', error);
+    throw new Error('Failed to fetch like status.');
+  }
+}

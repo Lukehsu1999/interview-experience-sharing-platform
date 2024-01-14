@@ -1,6 +1,6 @@
 import Display from '@/app/ui/posts/post-display';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
-import { fetchUserIdByNameEmail, fetchPostById } from '@/app/lib/data';
+import { fetchUserIdByNameEmail, fetchPostById, fetchLikeStatus } from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -20,6 +20,14 @@ export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const post = await fetchPostById(id);
 
+  // get like status
+  const likeStatusRes = await fetchLikeStatus(id, userId);
+  var likeStatus = false;
+  if (likeStatusRes == 1) {
+    likeStatus = true;
+  } else {
+    likeStatus = false;
+  }
   return (
     <main>
       <Breadcrumbs
@@ -32,7 +40,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       />
-      <Display post={post} userId={userId}/>
+      <Display post={post} userId={userId} likeStatus={likeStatus}/>
     </main>
   );
 }
