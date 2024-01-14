@@ -10,7 +10,7 @@ import { formatDateToLocal } from '@/app/lib/utils';
 import { addLike } from '@/app/lib/actions';
 import { useState } from 'react';
 
-export default function Display({ post }: { post: PostsTable }) {
+export default function Display({ post, userId }: { post: PostsTable, userId: string }) {
   console.log(post.content);
   {
     /* parse content into lines */
@@ -26,7 +26,7 @@ export default function Display({ post }: { post: PostsTable }) {
       const res = await addLike(
         post.id,
         post.creator_id,
-        '410544b2-4001-4271-9855-fec4b6a6442a',
+        userId,
       );
       console.log(res);
       setLiked(true);
