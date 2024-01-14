@@ -37,6 +37,20 @@ export type PostsTable = {
   email: string;
 };
 
+export type Like = {
+  id: string;
+  post_id: string;
+  liker_id: string;
+  creator_id: string;
+}
+
+export type View = {
+  id: string;
+  post_id: string;
+  viewer_id: string;
+  creator_id: string;
+}
+
 // From Invoices Project
 export type Customer = {
   id: string;

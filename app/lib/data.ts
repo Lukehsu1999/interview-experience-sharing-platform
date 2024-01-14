@@ -163,7 +163,18 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
       ORDER BY sharingposts.creation_date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-
+    // for each posts, get the total number of likes and views
+    for (let i = 0; i < posts.rows.length; i++) {
+      const postId = posts.rows[i].id;
+      const likes = await sql`
+        SELECT COUNT(*) FROM likes WHERE post_id = ${postId}
+      `;
+      const views = await sql`
+        SELECT COUNT(*) FROM views WHERE post_id = ${postId}
+      `;
+      posts.rows[i].likes = likes.rows[0].count;
+      posts.rows[i].views = views.rows[0].count;
+    }
     return posts.rows;
   } catch (error) {
     console.error('Database Error:', error);

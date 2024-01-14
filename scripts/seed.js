@@ -165,15 +165,62 @@ async function seedSharingPosts(client) {
 //     throw error;
 //   }
 // }
+async function seedLikes(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS likes (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        post_id UUID NOT NULL,
+        liker_id UUID NOT NULL,
+        creator_id UUID NOT NULL
+      );
+    `;
+
+    console.log(`Created "likes" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding likes:', error);
+    throw error;
+  }
+}
+
+async function seedViews(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS views (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        post_id UUID NOT NULL,
+        viewer_id UUID NOT NULL,
+        creator_id UUID NOT NULL
+      );
+    `;
+
+    console.log(`Created "views" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding views:', error);
+    throw error;
+  }
+}
 
 async function main() {
   const client = await db.connect();
 
   await seedUsers(client);
   await seedSharingPosts(client);
-//   await seedCustomers(client);
-//   await seedInvoices(client);
-//   await seedRevenue(client);
+  await seedLikes(client);
+  await seedViews(client);
+
 
   await client.end();
 }

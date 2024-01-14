@@ -144,3 +144,36 @@ export async function createUser(
     }
   }
 }
+
+export async function addLike(
+  post_id: string,
+  creator_id: string,
+  liker_id: string,
+) {
+  try {
+    const likeCnt = await sql`
+    SELECT COUNT(*)
+    FROM likes
+    WHERE post_id = ${post_id} AND liker_id = ${liker_id};
+  `;
+    const likeCntNum = likeCnt.rows[0].count;
+    if (likeCntNum >= 1) {
+      console.log('Already liked');
+      throw new Error('Already liked');
+    }
+    if (likeCntNum == 0) {
+      const insertLike = await sql`
+      INSERT INTO likes (post_id, creator_id, liker_id)
+      VALUES (${post_id}, ${creator_id}, ${liker_id});
+    `;
+    }
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error('Already liked');
+      return error.message;
+    } else {
+      console.error('Insert into Database error');
+      return 'Database Insertion error';
+    }
+  }
+}
