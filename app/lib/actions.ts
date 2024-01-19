@@ -184,3 +184,26 @@ export async function addLike(
     }
   }
 }
+export async function addView(
+  post_id: string,
+  creator_id: string,
+  viewer_id: string,
+) {
+  try {
+    const insertView = await sql`
+      INSERT INTO views (post_id, creator_id, viewer_id)
+      VALUES (${post_id}, ${creator_id}, ${viewer_id});
+    `;
+
+    console.log(`Insert views`);
+  } catch (error: any) {
+    // Check if the error is related to unique constraint violation
+    if (error.code === '23505') {
+      console.log('View already exists');
+      return "View already exists"; // Handle the case where the view already exists
+    }
+
+    console.error('Database Insertion View error:', error);
+    return "Database Insertion View error";
+  }
+}

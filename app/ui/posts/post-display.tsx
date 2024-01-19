@@ -7,7 +7,7 @@ import { Button } from '@/app/ui/button';
 import { createPost } from '@/app/lib/actions';
 import { PostsTable } from '@/app/lib/definitions';
 import { formatDateToLocal } from '@/app/lib/utils';
-import { addLike } from '@/app/lib/actions';
+import { addLike, addView } from '@/app/lib/actions';
 import { useState } from 'react';
 
 export default function Display({
@@ -25,7 +25,7 @@ export default function Display({
   }
   const contentLines = post.content.split('+');
   console.log(contentLines);
-  console.log("display like status: " + likeStatus);
+  console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
 
   //create a on click
@@ -39,6 +39,17 @@ export default function Display({
       console.log(err);
     }
   };
+
+  const addViewEvent = async () => {
+    try {
+      console.log('viewed');
+      const res = await addView(post.id, post.creator_id, userId);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  addViewEvent();
 
   return (
     <div>

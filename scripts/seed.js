@@ -198,7 +198,8 @@ async function seedViews(client) {
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         post_id UUID NOT NULL,
         viewer_id UUID NOT NULL,
-        creator_id UUID NOT NULL
+        creator_id UUID NOT NULL,
+        CONSTRAINT unique_post_viewer_pair UNIQUE (post_id, viewer_id)
       );
     `;
 
@@ -216,9 +217,9 @@ async function seedViews(client) {
 async function main() {
   const client = await db.connect();
 
-  await seedUsers(client);
-  await seedSharingPosts(client);
-  await seedLikes(client);
+  //await seedUsers(client);
+  //await seedSharingPosts(client);
+  //await seedLikes(client);
   await seedViews(client);
 
 

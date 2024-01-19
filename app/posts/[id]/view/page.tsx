@@ -40,6 +40,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           },
         ]}
       />
+      <p>Hey this is app\</p>
       <Display post={post} userId={userId} likeStatus={likeStatus}/>
     </main>
   );
