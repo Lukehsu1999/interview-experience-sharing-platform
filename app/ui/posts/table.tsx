@@ -24,18 +24,15 @@ export default async function InvoicesTable({
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
-                    <div className="mb-2 flex items-center">
-                      <p>{post.name}</p>
-                    </div>
                     <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
-                  <div>
+                  {/* <div>
                     <p className="text-xl font-medium">{post.title}</p>
                     <p>{formatDateToLocal(post.creation_date)}</p>
-                  </div>
+                  </div> */}
                   <div className="flex justify-end gap-2">
                     <ViewPost id={post.id} />
                   </div>
@@ -55,9 +52,9 @@ export default async function InvoicesTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   Title
                 </th>
-                <th scope="col" className="px-3 py-5 font-medium">
+                {/* <th scope="col" className="px-3 py-5 font-medium">
                   Date
-                </th>
+                </th> */}
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
                 </th>
@@ -65,15 +62,12 @@ export default async function InvoicesTable({
                   Type
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Creator
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Views
+                  Unique Views
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Likes
                 </th>
-                <th scope="col" className="relative py-3 pl-6 pr-3">
+                <th scope="col" className="relative py-3 pl-3 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -88,9 +82,9 @@ export default async function InvoicesTable({
                     {post.company}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">{post.title}</td>
-                  <td className="whitespace-nowrap px-3 py-3">
+                  {/* <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(post.creation_date)}
-                  </td>
+                  </td> */}
                   <td className="whitespace-nowrap px-3 py-3">
                     <p>{post.interview_status}</p>
                   </td>
@@ -98,15 +92,12 @@ export default async function InvoicesTable({
                     <p>{post.interview_type}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <p>{post.name}</p>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
                     <p>{post.views}</p>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     <p>{post.likes}</p>
                   </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                  <td className="whitespace-nowrap py-3 pl-3 pr-3">
                     <div className="flex justify-end gap-3">
                       <ViewPost id={post.id} />
                     </div>
