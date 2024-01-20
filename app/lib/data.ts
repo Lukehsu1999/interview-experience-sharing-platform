@@ -182,6 +182,49 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
   }
 }
 
+export async function fetchUserPosts(queryId: string) {
+  noStore();
+  console.log(queryId);
+  try {
+    const posts = await sql<PostsTable>`
+      SELECT
+        sharingposts.id,
+        sharingposts.creator_id,
+        sharingposts.creation_date,
+        sharingposts.company,
+        sharingposts.interview_status,
+        sharingposts.interview_type,
+        sharingposts.title,
+        sharingposts.content,
+        sharingposts.likes,
+        sharingposts.views,
+        users.name,
+        users.email
+      FROM sharingposts
+      JOIN users ON sharingposts.creator_id = users.id
+      WHERE
+        sharingposts.creator_id = ${queryId}
+      ORDER BY sharingposts.creation_date DESC
+    `;
+    // for each posts, get the total number of likes and views
+    for (let i = 0; i < posts.rows.length; i++) {
+      const postId = posts.rows[i].id;
+      const likes = await sql`
+        SELECT COUNT(*) FROM likes WHERE post_id = ${postId}
+      `;
+      const views = await sql`
+        SELECT COUNT(*) FROM views WHERE post_id = ${postId}
+      `;
+      posts.rows[i].likes = likes.rows[0].count;
+      posts.rows[i].views = views.rows[0].count;
+    }
+    return posts.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch posts.');
+  }
+}
+
 export async function fetchPostsPages(query: string) {
   noStore();
   try {
