@@ -66,6 +66,20 @@ export default function Display({
       <p>Interview Type: {post.interview_type}</p>
       <p>Likes: {post.likes}</p>
       <p>Views: {post.views}</p>
+      {/* if post.meet_able is true, show the meet_charge and available_time */}  
+      {post.meet_able && (
+        <div>
+          <p>Meet Charge: {post.meet_charge}</p>
+          <p>Available Time: {post.available_time}</p>
+        </div>
+      )}
+      {/* if post.meet_able is false, show the meet_charge and available_time */}  
+      {!post.meet_able && (
+        <div>
+          <p>Meet Charge: Not Available</p>
+          <p>Available Time: Not Available</p>
+        </div>
+      )}
       <LikeButton clickevent={addLikeEvent} liked_status={liked} />
     </div>
   );

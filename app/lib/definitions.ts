@@ -36,6 +36,9 @@ export type PostsTable = {
   content: string;
   likes: number; // outdated
   views: number; // outdated
+  meet_able: boolean;
+  meet_charge: number;
+  available_time: string;
   name: string;
   email: string;
 };

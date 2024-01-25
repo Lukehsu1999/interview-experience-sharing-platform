@@ -315,6 +315,9 @@ export async function fetchPostById(id: string) {
       sharingposts.content,
       sharingposts.likes,
       sharingposts.views,
+      sharingposts.meet_able,
+      sharingposts.meet_charge,
+      sharingposts.available_time,
       users.name,
       users.email
     FROM sharingposts
