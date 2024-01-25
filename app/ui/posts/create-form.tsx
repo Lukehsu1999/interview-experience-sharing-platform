@@ -12,18 +12,21 @@ interface FormProps {
   userId: string;
 }
 
-export default function Form({userId}: FormProps) {
-  console.log("Form userId: ", userId, "userId type: ", typeof userId);
+export default function Form({ userId }: FormProps) {
+  console.log('Form userId: ', userId, 'userId type: ', typeof userId);
   return (
     <form action={createPost}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* put input here*/}
         {/* Enter creator_id, will be hidden later */}
         <div className="mb-4">
-          <label htmlFor="amount" className="mb-2 block text-sm font-medium hidden">
+          <label
+            htmlFor="amount"
+            className="mb-2 block hidden text-sm font-medium"
+          >
             (hidden) Enter creator id, hidden later
           </label>
-          <div className="relative mt-2 rounded-md hidden">
+          <div className="relative mt-2 hidden rounded-md">
             <div className="relative">
               <input
                 id="creator_id"
@@ -133,7 +136,66 @@ export default function Form({userId}: FormProps) {
             </div>
           </div>
         </div>
+        {/* select true or false for meet_able*/}
+        <div className="mb-4">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+            Are you open for other people to reach out to you for a paid 20 mins
+            meeting call?
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <select
+                id="meet_able"
+                name="meet_able"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2"
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        {/* enter an integer amount of usd dollar for meet_charge*/}
+        {/* enter an integer amount of usd dollar for meet_charge*/}
+        <div className="mb-4">
+          <label htmlFor="amount" className="mb-2 block text-sm font-medium">
+            If yes, how much would you charge for a 20 mins meeting call? (In
+            USD)
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="meet_charge"
+                name="meet_charge"
+                type="number"
+                placeholder="Enter an integer amount of usd dollar for meet_charge"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              />
+            </div>
+          </div>
+        </div>
+        {/* text input for available time */}
+        <div className="mt-6">
+          <label
+            htmlFor="available_time"
+            className="mb-2 block text-sm font-medium"
+          >
+            Enter your available time
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="available_time"
+                name="available_time"
+                type="text"
+                placeholder="Enter your available time here"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+              />
+            </div>
+          </div>
+        </div>
       </div>
+
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/posts"
