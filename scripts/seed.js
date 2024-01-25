@@ -48,6 +48,7 @@ ADD CONSTRAINT unique_name_email_constraint UNIQUE (name, email);
 }
 
 async function seedSharingPosts(client) {
+  console.log("entering seedSharingPosts");
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
@@ -63,7 +64,10 @@ async function seedSharingPosts(client) {
     title VARCHAR(255),
     content TEXT,
     likes INT,
-    views INT
+    views INT,
+    meet_able BOOLEAN,
+    meet_charge INT,
+    available_time VARCHAR(255)
   );
 `;
 
@@ -73,8 +77,8 @@ async function seedSharingPosts(client) {
     const insertedSharingposts = await Promise.all(
       sharingposts.map(
         (post) => client.sql`
-        INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)
-        VALUES (${post.creator_id}, ${post.creation_date}, ${post.company}, ${post.interview_status}, ${post.interview_type}, ${post.title}, ${post.content}, ${post.likes}, ${post.views})
+        INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
+        VALUES (${post.creator_id}, ${post.creation_date}, ${post.company}, ${post.interview_status}, ${post.interview_type}, ${post.title}, ${post.content}, ${post.likes}, ${post.views}, ${post.meet_able}, ${post.meet_charge}, ${post.available_time})
         ON CONFLICT (id) DO NOTHING;
       `,
       ),
@@ -218,8 +222,8 @@ async function main() {
   const client = await db.connect();
 
   //await seedUsers(client);
-  //await seedSharingPosts(client);
-  //await seedLikes(client);
+  await seedSharingPosts(client);
+  await seedLikes(client);
   await seedViews(client);
 
 

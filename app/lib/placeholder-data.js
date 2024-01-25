@@ -80,6 +80,9 @@ const sharingposts = [
     content: 'Solving Data structure problems on the phone. \n Quite Challenging, need to be good at explaining code without editor.',
     likes: 15,
     views: 20,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[1].id,
@@ -91,6 +94,9 @@ const sharingposts = [
     content: '3 coding questions, 1 debugging question, 1 work simulation question. \n 1. Given a string, find the longest substring with at most 2 distinct characters. \n 2. Given a string, find the longest substring with at most 2 distinct characters. \n 3. Given a string, find the longest substring with at most 2 distinct characters. \n 4. Given a string, find the longest substring with at most 2 distinct characters. \n 5. Given a string, find the longest substring with at most 2 distinct characters.',
     likes: 25,
     views: 30,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[2].id,
@@ -102,6 +108,9 @@ const sharingposts = [
     content: 'Ask me about my strengths and weakness, and how I would handle a difficult situation. \n Quite Challenging, need to be good at explaining code without editor.',
     likes: 34,
     views: 68,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[3].id,
@@ -113,6 +122,9 @@ const sharingposts = [
     content: 'Ask me about why I want to work there',
     likes: 12,
     views: 16,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[4].id,
@@ -124,6 +136,9 @@ const sharingposts = [
     content: 'Ask me about ROS, my school projects, and my experience with robotic engineering',
     likes: 23,
     views: 46,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[5].id,
@@ -135,6 +150,9 @@ const sharingposts = [
     content: 'Ask me a case question about how to increase the revenue of a company',
     likes: 16,
     views: 35,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[6].id,
@@ -146,6 +164,9 @@ const sharingposts = [
     content: 'I forgot to introduce myself.',
     likes: 5,
     views: 20,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[7].id,
@@ -157,6 +178,9 @@ const sharingposts = [
     content: 'Practice over 50+ cases, finally got an offer from Deloitte',
     likes: 21,
     views: 50,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[8].id,
@@ -168,6 +192,9 @@ const sharingposts = [
     content: 'Tell me about a time you handle difflcult person',
     likes: 32,
     views: 50,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[9].id,
@@ -179,6 +206,9 @@ const sharingposts = [
     content: 'A system design question and coding it out',
     likes: 43,
     views: 50,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[2].id,
@@ -190,6 +220,9 @@ const sharingposts = [
     content: '2 Coding questions with 45 minutes in total, need to further optimize',
     likes: 30,
     views: 40,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[3].id,
@@ -201,6 +234,9 @@ const sharingposts = [
     content: 'Very fun and challenging, need to be good at explaining code and debugging',
     likes: 55,
     views: 100,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[4].id,
@@ -212,6 +248,9 @@ const sharingposts = [
     content: 'Heavy math problems, need to be good at probability and statistics',
     likes: 34,
     views: 50,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[5].id,
@@ -223,6 +262,9 @@ const sharingposts = [
     content: '2 questions, one on algorithm and one on SQL',
     likes: 20,
     views: 40,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
   {
     creator_id: users[6].id,
@@ -234,6 +276,9 @@ const sharingposts = [
     content: 'Need to be able to sing and dance, make kids happy, there are 10 kids as interviewers',
     likes: 100,
     views: 125,
+    meet_able: true,
+    meet_charge: 20,
+    available_time: 'Monday 10:00am - 12:00pm',
   },
 ];
 

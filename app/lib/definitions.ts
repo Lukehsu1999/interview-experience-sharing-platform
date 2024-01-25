@@ -18,8 +18,11 @@ export type SharingPost = {
   interview_type: 'Technical Interview' | 'Behavioral Interview' | 'Case Interview' | 'Others';
   title: string;
   content: string;
-  likes: number;
-  views: number;
+  likes: number; // outdated
+  views: number; // outdated
+  meet_able: boolean;
+  meet_charge: number;
+  available_time: string;
 };
 
 export type PostsTable = {
@@ -31,8 +34,8 @@ export type PostsTable = {
   interview_type: 'Technical Interview' | 'Behavioral Interview' | 'Case Interview' | 'Others';
   title: string;
   content: string;
-  likes: number;
-  views: number;
+  likes: number; // outdated
+  views: number; // outdated
   name: string;
   email: string;
 };
