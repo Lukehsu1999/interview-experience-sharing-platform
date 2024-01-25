@@ -34,6 +34,9 @@ const FormSchema = z.object({
   content: z.string(),
   likes: z.coerce.number(),
   views: z.coerce.number(),
+  meet_able: z.coerce.boolean(),
+  meet_charge: z.coerce.number(),
+  available_time: z.string(),
 });
 
 const CreatePost = FormSchema.omit({
@@ -51,6 +54,9 @@ export async function createPost(formData: FormData) {
     interview_status,
     interview_type,
     content,
+    meet_able,
+    meet_charge,
+    available_time,
   } = CreatePost.parse({
     creator_id: formData.get('creator_id'),
     company: formData.get('company'),
@@ -58,15 +64,19 @@ export async function createPost(formData: FormData) {
     interview_status: formData.get('interview_status'),
     interview_type: formData.get('interview_type'),
     content: formData.get('content'),
+    meet_able: formData.get('meet_able'),
+    meet_charge: formData.get('meet_charge'),
+    available_time: formData.get('available_time'),
   });
   const creation_date = new Date().toISOString().split('T')[0];
   const likes = 0;
   const views = 0;
   console.log("createPost: ", creator_id, " type of creator_id", typeof creator_id);
+  console.log("meet_able: ", meet_able, " meet_charge: ", meet_charge, " available_time: ", available_time);
 
   await sql`
-    INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views)
-    VALUES (${creator_id}, ${creation_date}, ${company}, ${interview_status}, ${interview_type}, ${title}, ${content}, ${likes}, ${views})
+    INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
+    VALUES (${creator_id}, ${creation_date}, ${company}, ${interview_status}, ${interview_type}, ${title}, ${content}, ${likes}, ${views}, ${meet_able}, ${meet_charge}, ${available_time})
   `;
 
   revalidatePath('/posts');
