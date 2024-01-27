@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <p>Hey this is app\</p>
-      <Display post={post} userId={userId} likeStatus={likeStatus}/>
+      <Display post={post} userId={userId} userName={String(userName)} userEmail={String(userEmail)} likeStatus={likeStatus}/>
     </main>
   );
 }

@@ -13,10 +13,14 @@ import { useState } from 'react';
 export default function Display({
   post,
   userId,
+  userName,
+  userEmail,
   likeStatus,
 }: {
   post: PostsTable;
   userId: string;
+  userName: string;
+  userEmail: string;
   likeStatus: boolean;
 }) {
   console.log(post.content);
@@ -25,6 +29,7 @@ export default function Display({
   }
   const contentLines = post.content.split('+');
   console.log(contentLines);
+  console.log("user id: ", userId, " user name: ", userName, " user email: ", userEmail);
   console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
 
@@ -40,16 +45,16 @@ export default function Display({
     }
   };
 
-  const addViewEvent = async () => {
-    try {
-      console.log('viewed');
-      const res = await addView(post.id, post.creator_id, userId);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  addViewEvent();
+  // const addViewEvent = async () => {
+  //   try {
+  //     console.log('viewed');
+  //     const res = await addView(post.id, post.creator_id, userId);
+  //     console.log(res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+  //addViewEvent();
 
   return (
     <div>
