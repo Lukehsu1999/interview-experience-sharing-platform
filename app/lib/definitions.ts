@@ -57,6 +57,21 @@ export type View = {
   creator_id: string;
 }
 
+export type Meet = {
+  id: string;
+  post_id: string;
+  seeker_id: string;
+  seeker_name: string;
+  seeker_email: string;
+  sharer_id: string;
+  sharer_name: string;
+  sharer_email: string;
+  charge: number;
+  additional_fee: number;
+  meet_status: 'pending' | 'confirmed' | 'canceled' | 'finished';
+  payment_status: 'unpaid' | 'paid' | 'transferred' | 'refunded';
+}
+
 // From Invoices Project
 export type Customer = {
   id: string;

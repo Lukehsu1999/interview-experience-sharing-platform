@@ -69,8 +69,9 @@ export default function Display({
       {/* if post.meet_able is true, show the meet_charge and available_time */}  
       {post.meet_able && (
         <div>
-          <p>Meet Charge: {post.meet_charge}</p>
+          <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
           <p>Available Time: {post.available_time}</p>
+          <Button>Send an Invite for a one-on-one meeting</Button>
         </div>
       )}
       {/* if post.meet_able is false, show the meet_charge and available_time */}  

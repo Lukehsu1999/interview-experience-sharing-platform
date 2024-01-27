@@ -218,13 +218,47 @@ async function seedViews(client) {
   }
 }
 
+async function seedMeets(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS meets (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        post_id UUID NOT NULL,
+        seeker_id UUID NOT NULL,
+        seeker_name VARCHAR(255) NOT NULL,
+        seeker_email TEXT NOT NULL,
+        sharer_id UUID NOT NULL,
+        sharer_name VARCHAR(255) NOT NULL,
+        sharer_email TEXT NOT NULL,
+        charge INT,
+        additional_fee INT,
+        meet_status VARCHAR(255),
+        payment_status VARCHAR(255),
+        CONSTRAINT unique_post_seeker_sharer_pair UNIQUE (post_id, seeker_id, sharer_id)
+      );
+    `;
+
+    console.log(`Created "meets" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding meets:', error);
+    throw error;
+  }
+}
+
 async function main() {
   const client = await db.connect();
 
   //await seedUsers(client);
-  await seedSharingPosts(client);
-  await seedLikes(client);
-  await seedViews(client);
+  // await seedSharingPosts(client);
+  // await seedLikes(client);
+  // await seedViews(client);
+  await seedMeets(client);
 
 
   await client.end();
