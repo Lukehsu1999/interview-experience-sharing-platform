@@ -7,7 +7,7 @@ import { Button } from '@/app/ui/button';
 import { createPost } from '@/app/lib/actions';
 import { PostsTable } from '@/app/lib/definitions';
 import { formatDateToLocal } from '@/app/lib/utils';
-import { addLike, addView } from '@/app/lib/actions';
+import { addLike, addMeet } from '@/app/lib/actions';
 import { useState } from 'react';
 
 export default function Display({
@@ -16,12 +16,14 @@ export default function Display({
   userName,
   userEmail,
   likeStatus,
+  invitedStatus,
 }: {
   post: PostsTable;
   userId: string;
   userName: string;
   userEmail: string;
   likeStatus: boolean;
+  invitedStatus: boolean;
 }) {
   console.log(post.content);
   {
@@ -32,6 +34,7 @@ export default function Display({
   console.log("user id: ", userId, " user name: ", userName, " user email: ", userEmail);
   console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
+  const [invited, setInvited] = useState(false);
 
   //create a on click
   const addLikeEvent = async () => {
@@ -45,16 +48,17 @@ export default function Display({
     }
   };
 
-  // const addViewEvent = async () => {
-  //   try {
-  //     console.log('viewed');
-  //     const res = await addView(post.id, post.creator_id, userId);
-  //     console.log(res);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-  //addViewEvent();
+
+  const addMeetEvent = async () => {
+    try {
+      console.log('clicked');
+      const res = await addMeet(post.id, post.creator_id, "John Doe", "doe@gamil.com", userId, userName, userEmail, post.meet_charge, 0, "Pending", "Unpaid");
+      console.log(res);
+      setInvited(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div>
@@ -76,7 +80,7 @@ export default function Display({
         <div>
           <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
           <p>Available Time: {post.available_time}</p>
-          <Button>Send an Invite for a one-on-one meeting</Button>
+          <MeetButton clickevent={addMeetEvent} invited_status={invitedStatus}/>
         </div>
       )}
       {/* if post.meet_able is false, show the meet_charge and available_time */}  
@@ -109,6 +113,29 @@ function LikeButton({
       <Button className="w-50 mt-4" onClick={clickevent}>
         <HeartIcon className="ml-auto h-5 w-5 text-gray-50" />
         Like
+      </Button>
+    );
+  }
+}
+
+function MeetButton({
+  clickevent,
+  invited_status,
+}: {
+  clickevent: () => void;
+  invited_status: boolean;
+}) {
+  if (invited_status) {
+    return (
+      <Button className="w-50 mt-4" disabled={true}>
+        Invited!
+      </Button>
+    );
+  } else {
+    return (
+      <Button className="w-50 mt-4" onClick={clickevent}>
+        <HeartIcon className="ml-auto h-5 w-5 text-gray-50" />
+        Invite to Meet
       </Button>
     );
   }

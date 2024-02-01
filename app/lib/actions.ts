@@ -71,8 +71,20 @@ export async function createPost(formData: FormData) {
   const creation_date = new Date().toISOString().split('T')[0];
   const likes = 0;
   const views = 0;
-  console.log("createPost: ", creator_id, " type of creator_id", typeof creator_id);
-  console.log("meet_able: ", meet_able, " meet_charge: ", meet_charge, " available_time: ", available_time);
+  console.log(
+    'createPost: ',
+    creator_id,
+    ' type of creator_id',
+    typeof creator_id,
+  );
+  console.log(
+    'meet_able: ',
+    meet_able,
+    ' meet_charge: ',
+    meet_charge,
+    ' available_time: ',
+    available_time,
+  );
 
   await sql`
     INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
@@ -210,11 +222,44 @@ export async function addView(
     // Check if the error is related to unique constraint violation
     if (error.code === '23505') {
       console.log('View already exists');
-      return "View already exists"; // Handle the case where the view already exists
+      return 'View already exists'; // Handle the case where the view already exists
     }
-    console.log("Database insert");
+    console.log('Database insert');
 
     console.error('Database Insertion View error:', error);
-    return "Database Insertion View error";
+    return 'Database Insertion View error';
+  }
+}
+export async function addMeet(
+  post_id: string,
+  seeker_id: string,
+  seeker_name: string,
+  seeker_email: string,
+  sharer_id: string,
+  sharer_name: string,
+  sharer_email: string,
+  charge: number,
+  additional_fee: number,
+  meet_status: string,
+  payment_status: string
+) {
+  try {
+    const insertMeet = await sql`
+      INSERT INTO meets (post_id, seeker_id, seeker_name, seeker_email, sharer_id, sharer_name, sharer_email, charge, additional_fee, meet_status, payment_status)
+      VALUES (${post_id}, ${seeker_id}, ${seeker_name}, ${seeker_email}, ${sharer_id}, ${sharer_name}, ${sharer_email}, ${charge}, ${additional_fee}, ${meet_status}, ${payment_status});
+    `;
+
+    console.log(`Insert meets`);
+    return 'Success! Meet added';
+  } catch (error: any) {
+    // Check if the error is related to unique constraint violation
+    if (error.code === '23505') {
+      console.log('Meet already exists');
+      return 'Meet already exists'; // Handle the case where the view already exists
+    }
+    console.log('Database insert');
+
+    console.error('Database Insertion Meet error:', error);
+    return 'Database Insertion Meet error';
   }
 }
