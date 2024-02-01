@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ViewPost } from '@/app/ui/posts/buttons';
+import { ViewPostButton } from '@/app/ui/posts/viewPostButton';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredPosts } from '@/app/lib/data';
@@ -7,11 +7,14 @@ import { fetchFilteredPosts } from '@/app/lib/data';
 export default async function InvoicesTable({
   query,
   currentPage,
+  viewer_id
 }: {
   query: string;
   currentPage: number;
+  viewer_id: string;
 }) {
   const posts = await fetchFilteredPosts(query, currentPage);
+
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -34,7 +37,7 @@ export default async function InvoicesTable({
                     <p>{formatDateToLocal(post.creation_date)}</p>
                   </div> */}
                   <div className="flex justify-end gap-2">
-                    <ViewPost id={post.id} />
+                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
                   </div>
                 </div>
               </div>
@@ -99,7 +102,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-3 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ViewPost id={post.id} />
+                      <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
                     </div>
                   </td>
                 </tr>
