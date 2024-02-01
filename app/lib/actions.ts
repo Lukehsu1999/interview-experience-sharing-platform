@@ -212,6 +212,7 @@ export async function addView(
       console.log('View already exists');
       return "View already exists"; // Handle the case where the view already exists
     }
+    console.log("Database insert");
 
     console.error('Database Insertion View error:', error);
     return "Database Insertion View error";
