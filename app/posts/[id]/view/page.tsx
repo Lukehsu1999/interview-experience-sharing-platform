@@ -28,6 +28,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   } else {
     likeStatus = false;
   }
+  //get meet status
+  // const meetStatus = await fetchMeetStatus(id, userId);
+
   return (
     <main>
       <Breadcrumbs
