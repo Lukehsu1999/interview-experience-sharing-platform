@@ -1,12 +1,12 @@
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 export default function MiumeeLogo() {
   return (
     <div
       className={`flex flex-row items-center leading-none text-white`}
     >
-      <GlobeAltIcon className="h-12 w-12 rotate-[15deg]" />
-      <p className="text-[44px]">Miumee</p>
+      <Image src="/White logo - no background.png" alt="Miumee" width={150} height={44} />
     </div>
   );
 }
