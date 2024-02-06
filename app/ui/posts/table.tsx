@@ -30,16 +30,17 @@ export default async function InvoicesTable({
                     <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
+                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
-                  {/* <div>
+                {/* <div className="flex w-full items-center justify-between pt-4">
+                  <div>
                     <p className="text-xl font-medium">{post.title}</p>
                     <p>{formatDateToLocal(post.creation_date)}</p>
-                  </div> */}
+                  </div>
                   <div className="flex justify-end gap-2">
                   <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
                   </div>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
