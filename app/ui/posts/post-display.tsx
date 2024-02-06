@@ -34,7 +34,7 @@ export default function Display({
   console.log("user id: ", userId, " user name: ", userName, " user email: ", userEmail);
   console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
-  const [invited, setInvited] = useState(false);
+  const [invited, setInvited] = useState(invitedStatus);
 
   //create a on click
   const addLikeEvent = async () => {
@@ -52,7 +52,7 @@ export default function Display({
   const addMeetEvent = async () => {
     try {
       console.log('clicked');
-      const res = await addMeet(post.id, post.creator_id, "John Doe", "doe@gamil.com", userId, userName, userEmail, post.meet_charge, 0, "Pending", "Unpaid");
+      const res = await addMeet(post.id, userId, userName, userEmail, post.creator_id, post.name, post.email, post.meet_charge, 0, "Pending", "Unpaid");//sequence wrong!
       console.log(res);
       setInvited(true);
     } catch (err) {
@@ -80,7 +80,7 @@ export default function Display({
         <div>
           <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
           <p>Available Time: {post.available_time}</p>
-          <MeetButton clickevent={addMeetEvent} invited_status={invitedStatus}/>
+          <MeetButton clickevent={addMeetEvent} invited_status={invited}/>
         </div>
       )}
       {/* if post.meet_able is false, show the meet_charge and available_time */}  
@@ -104,7 +104,7 @@ function LikeButton({
 }) {
   if (liked_status) {
     return (
-      <Button className="w-50 mt-4" disabled={true}>
+      <Button className="w-50 mt-4 bg-green-500 hover:bg-green-500" disabled={true}>
         Liked!
       </Button>
     );
@@ -127,7 +127,7 @@ function MeetButton({
 }) {
   if (invited_status) {
     return (
-      <Button className="w-50 mt-4" disabled={true}>
+      <Button className="w-50 mt-4 bg-green-500 hover:bg-green-500" disabled={true}>
         Invited!
       </Button>
     );

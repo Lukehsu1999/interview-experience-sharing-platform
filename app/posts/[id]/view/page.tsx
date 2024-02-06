@@ -1,6 +1,6 @@
 import Display from '@/app/ui/posts/post-display';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
-import { fetchUserIdByNameEmail, fetchPostById, fetchLikeStatus } from '@/app/lib/data';
+import { fetchUserIdByNameEmail, fetchPostById, fetchLikeStatus, fetchMeetStatus } from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -29,7 +29,14 @@ export default async function Page({ params }: { params: { id: string } }) {
     likeStatus = false;
   }
   //get meet status
-  // const meetStatus = await fetchMeetStatus(id, userId);
+  const meetStatusRes = await fetchMeetStatus(id, userId);
+  var meetStatus = false;
+  if (meetStatusRes == 1) {
+    meetStatus = true;
+  } else {
+    meetStatus = false;
+  }
+
 
   return (
     <main>
@@ -44,7 +51,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <p>Hey this is app\</p>
-      <Display post={post} userId={userId} userName={String(userName)} userEmail={String(userEmail)} likeStatus={likeStatus} invitedStatus={false}/>
+      <Display post={post} userId={userId} userName={String(userName)} userEmail={String(userEmail)} likeStatus={likeStatus} invitedStatus={meetStatus}/>
     </main>
   );
 }
