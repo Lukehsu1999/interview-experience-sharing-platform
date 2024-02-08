@@ -122,7 +122,7 @@ export default function Display({
           Likes: <span className="text-gray-800">{post.likes}</span>
         </p>
         <p className="text-gray-600">
-          Views: <span className="text-gray-800">{post.views}</span>
+          Unique Views: <span className="text-gray-800">{post.views}</span>
         </p>
       </div>
 
