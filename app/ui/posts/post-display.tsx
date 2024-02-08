@@ -8,7 +8,7 @@ import { createPost } from '@/app/lib/actions';
 import { PostsTable } from '@/app/lib/definitions';
 import { formatDateToLocal } from '@/app/lib/utils';
 import { addLike, addMeet } from '@/app/lib/actions';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Display({
   post,
@@ -42,7 +42,19 @@ export default function Display({
   console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
   const [invited, setInvited] = useState(invitedStatus);
+  const [content, setContent] = useState(post.content);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  useEffect(() => {
+    if (textareaRef.current){
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [content]);
+
+  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
+  };
   //create a on click
   const addLikeEvent = async () => {
     try {
@@ -79,42 +91,20 @@ export default function Display({
   };
 
   return (
-    // <div>
-    //   <h2>{post.title}</h2>
-    //   {/* {contentLines.map((line, index) => (
-    //     <p key={index}>{line}</p>
-    //   ))} */}
-    //   <textarea value={post.content}></textarea>
-    //   <p>Creator: {post.name}</p>
-    //   <p>Email: {post.email}</p>
-    //   <p>Company: {post.company}</p>
-    //   <p>Creation Date: {formatDateToLocal(post.creation_date)}</p>
-    //   <p>Interview Status: {post.interview_status}</p>
-    //   <p>Interview Type: {post.interview_type}</p>
-    //   <p>Likes: {post.likes}</p>
-    //   <p>Views: {post.views}</p>
-    //   {/* if post.meet_able is true, show the meet_charge and available_time */}
-    //   {post.meet_able && (
-    //     <div>
-    //       <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
-    //       <p>Available Time: {post.available_time}</p>
-    //       <MeetButton clickevent={addMeetEvent} invited_status={invited}/>
-    //     </div>
-    //   )}
-    //   {/* if post.meet_able is false, show the meet_charge and available_time */}
-    //   {!post.meet_able && (
-    //     <div>
-    //       <p>Meet Charge: Not Available</p>
-    //       <p>Available Time: Not Available</p>
-    //     </div>
-    //   )}
-    //   <LikeButton clickevent={addLikeEvent} liked_status={liked} />
-    // </div>
     <div className="mb-4 rounded-lg bg-white p-6 shadow-lg">
       <h2 className="mb-4 text-2xl font-bold text-gray-800">{post.title}</h2>
-      <textarea
+      {/* <textarea
         className="mb-4 block w-full rounded-lg border border-gray-300 p-4 text-gray-700 focus:border-blue-500 focus:ring-blue-500"
         value={post.content}
+        readOnly
+      ></textarea> */}
+      <textarea
+        id="content"
+        ref={textareaRef}
+        value={content}
+        onChange={handleContentChange}
+        className="w-full border border-gray-300 p-2 rounded-md"
+        style={{ overflowY: 'hidden' }} // Prevent scrollbar from appearing
         readOnly
       ></textarea>
       <p className="text-gray-600">
