@@ -236,6 +236,7 @@ async function seedMeets(client) {
         additional_fee INT,
         meet_status VARCHAR(255),
         payment_status VARCHAR(255),
+        received_date DATE NOT NULL,
         CONSTRAINT unique_post_seeker_sharer_pair UNIQUE (post_id, seeker_id, sharer_id)
       );
     `;

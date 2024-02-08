@@ -244,9 +244,10 @@ export async function addMeet(
   payment_status: string
 ) {
   try {
+    const received_date = new Date().toISOString().split('T')[0];
     const insertMeet = await sql`
-      INSERT INTO meets (post_id, seeker_id, seeker_name, seeker_email, sharer_id, sharer_name, sharer_email, charge, additional_fee, meet_status, payment_status)
-      VALUES (${post_id}, ${seeker_id}, ${seeker_name}, ${seeker_email}, ${sharer_id}, ${sharer_name}, ${sharer_email}, ${charge}, ${additional_fee}, ${meet_status}, ${payment_status});
+      INSERT INTO meets (post_id, seeker_id, seeker_name, seeker_email, sharer_id, sharer_name, sharer_email, charge, additional_fee, meet_status, payment_status, received_date)
+      VALUES (${post_id}, ${seeker_id}, ${seeker_name}, ${seeker_email}, ${sharer_id}, ${sharer_name}, ${sharer_email}, ${charge}, ${additional_fee}, ${meet_status}, ${payment_status}, ${received_date});
     `;
 
     console.log(`Insert meets`);

@@ -70,6 +70,7 @@ export type Meet = {
   additional_fee: number;
   meet_status: 'pending' | 'confirmed' | 'canceled' | 'finished';
   payment_status: 'unpaid' | 'paid' | 'transferred' | 'refunded';
+  received_date: string;
 }
 
 // From Invoices Project
