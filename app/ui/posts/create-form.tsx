@@ -1,3 +1,5 @@
+'use client';
+
 import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
 import {
@@ -8,12 +10,25 @@ import {
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { createPost } from '@/app/lib/actions';
+import { useState, useEffect, useRef } from 'react';
 interface FormProps {
   userId: string;
 }
 
 export default function Form({ userId }: FormProps) {
-  console.log('Form userId: ', userId, 'userId type: ', typeof userId);
+  // console.log('Form userId: ', userId, 'userId type: ', typeof userId);
+  const [content, setContent] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (textareaRef.current){
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [content]);
+
+  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
+  };
   return (
     <form action={createPost}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -130,8 +145,11 @@ export default function Form({ userId }: FormProps) {
               <textarea
                 id="content"
                 name="content"
+                ref={textareaRef}
                 placeholder="Enter your content..."
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                onChange={handleContentChange}
+                className="w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-500"
+                
               ></textarea>
             </div>
           </div>

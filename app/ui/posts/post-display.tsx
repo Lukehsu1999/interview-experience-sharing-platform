@@ -93,11 +93,6 @@ export default function Display({
   return (
     <div className="mb-4 rounded-lg bg-white p-6 shadow-lg">
       <h2 className="mb-4 text-2xl font-bold text-gray-800">{post.title}</h2>
-      {/* <textarea
-        className="mb-4 block w-full rounded-lg border border-gray-300 p-4 text-gray-700 focus:border-blue-500 focus:ring-blue-500"
-        value={post.content}
-        readOnly
-      ></textarea> */}
       <textarea
         id="content"
         ref={textareaRef}
