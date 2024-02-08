@@ -46,13 +46,15 @@ export default function Display({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    if (textareaRef.current){
+    if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [content]);
 
-  const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     setContent(event.target.value);
   };
   //create a on click
@@ -98,27 +100,31 @@ export default function Display({
         ref={textareaRef}
         value={content}
         onChange={handleContentChange}
-        className="w-full border border-gray-300 p-2 rounded-md"
+        className="w-full rounded-md border border-gray-300 p-2"
         style={{ overflowY: 'hidden' }} // Prevent scrollbar from appearing
         readOnly
       ></textarea>
       <p className="text-gray-600">
         Company: <span className="text-gray-800">{post.company}</span>
       </p>
-      <p className="text-gray-600">
-        Interview Status:{' '}
-        <span className="text-gray-800">{post.interview_status}</span>
-      </p>
-      <p className="text-gray-600">
-        Interview Type:{' '}
-        <span className="text-gray-800">{post.interview_type}</span>
-      </p>
-      <p className="text-gray-600">
-        Likes: <span className="text-gray-800">{post.likes}</span>
-      </p>
-      <p className="text-gray-600">
-        Views: <span className="text-gray-800">{post.views}</span>
-      </p>
+      <div className="grid grid-cols-2">
+        <p className="text-gray-600">
+          Status:{' '}
+          <span className="text-gray-800">{post.interview_status}</span>
+        </p>
+        <p className="text-gray-600">
+          Type:{' '}
+          <span className="text-gray-800">{post.interview_type}</span>
+        </p>
+      </div>
+      <div className="grid grid-cols-2">
+        <p className="text-gray-600">
+          Likes: <span className="text-gray-800">{post.likes}</span>
+        </p>
+        <p className="text-gray-600">
+          Views: <span className="text-gray-800">{post.views}</span>
+        </p>
+      </div>
 
       {post.meet_able ? (
         <div className="mt-4">
