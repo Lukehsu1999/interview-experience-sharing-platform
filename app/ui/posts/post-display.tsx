@@ -31,7 +31,14 @@ export default function Display({
   }
   const contentLines = post.content.split('+');
   console.log(contentLines);
-  console.log("user id: ", userId, " user name: ", userName, " user email: ", userEmail);
+  console.log(
+    'user id: ',
+    userId,
+    ' user name: ',
+    userName,
+    ' user email: ',
+    userEmail,
+  );
   console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
   const [invited, setInvited] = useState(invitedStatus);
@@ -48,49 +55,112 @@ export default function Display({
     }
   };
 
-
   const addMeetEvent = async () => {
     try {
       console.log('clicked');
-      const res = await addMeet(post.id, userId, userName, userEmail, post.creator_id, post.name, post.email, post.meet_charge, 0, "Pending", "Unpaid");//sequence wrong!
+      const res = await addMeet(
+        post.id,
+        userId,
+        userName,
+        userEmail,
+        post.creator_id,
+        post.name,
+        post.email,
+        post.meet_charge,
+        0,
+        'Pending',
+        'Unpaid',
+      ); //sequence wrong!
       console.log(res);
       setInvited(true);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
-    <div>
-      <h2>{post.title}</h2>
-      {/* {contentLines.map((line, index) => (
-        <p key={index}>{line}</p>
-      ))} */}
-      <textarea value={post.content}></textarea>
-      <p>Creator: {post.name}</p>
-      <p>Email: {post.email}</p>
-      <p>Company: {post.company}</p>
-      <p>Creation Date: {formatDateToLocal(post.creation_date)}</p>
-      <p>Interview Status: {post.interview_status}</p>
-      <p>Interview Type: {post.interview_type}</p>
-      <p>Likes: {post.likes}</p>
-      <p>Views: {post.views}</p>
-      {/* if post.meet_able is true, show the meet_charge and available_time */}  
-      {post.meet_able && (
-        <div>
-          <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
-          <p>Available Time: {post.available_time}</p>
-          <MeetButton clickevent={addMeetEvent} invited_status={invited}/>
+    // <div>
+    //   <h2>{post.title}</h2>
+    //   {/* {contentLines.map((line, index) => (
+    //     <p key={index}>{line}</p>
+    //   ))} */}
+    //   <textarea value={post.content}></textarea>
+    //   <p>Creator: {post.name}</p>
+    //   <p>Email: {post.email}</p>
+    //   <p>Company: {post.company}</p>
+    //   <p>Creation Date: {formatDateToLocal(post.creation_date)}</p>
+    //   <p>Interview Status: {post.interview_status}</p>
+    //   <p>Interview Type: {post.interview_type}</p>
+    //   <p>Likes: {post.likes}</p>
+    //   <p>Views: {post.views}</p>
+    //   {/* if post.meet_able is true, show the meet_charge and available_time */}
+    //   {post.meet_able && (
+    //     <div>
+    //       <p>Meeting Charge: {post.meet_charge} (an addition 10% platform fee will be charged)</p>
+    //       <p>Available Time: {post.available_time}</p>
+    //       <MeetButton clickevent={addMeetEvent} invited_status={invited}/>
+    //     </div>
+    //   )}
+    //   {/* if post.meet_able is false, show the meet_charge and available_time */}
+    //   {!post.meet_able && (
+    //     <div>
+    //       <p>Meet Charge: Not Available</p>
+    //       <p>Available Time: Not Available</p>
+    //     </div>
+    //   )}
+    //   <LikeButton clickevent={addLikeEvent} liked_status={liked} />
+    // </div>
+    <div className="mb-4 rounded-lg bg-white p-6 shadow-lg">
+      <h2 className="mb-4 text-2xl font-bold text-gray-800">{post.title}</h2>
+      <textarea
+        className="mb-4 block w-full rounded-lg border border-gray-300 p-4 text-gray-700 focus:border-blue-500 focus:ring-blue-500"
+        value={post.content}
+        readOnly
+      ></textarea>
+      <p className="text-gray-600">
+        Company: <span className="text-gray-800">{post.company}</span>
+      </p>
+      <p className="text-gray-600">
+        Interview Status:{' '}
+        <span className="text-gray-800">{post.interview_status}</span>
+      </p>
+      <p className="text-gray-600">
+        Interview Type:{' '}
+        <span className="text-gray-800">{post.interview_type}</span>
+      </p>
+      <p className="text-gray-600">
+        Likes: <span className="text-gray-800">{post.likes}</span>
+      </p>
+      <p className="text-gray-600">
+        Views: <span className="text-gray-800">{post.views}</span>
+      </p>
+
+      {post.meet_able ? (
+        <div className="mt-4">
+          <p className="text-gray-600">
+            Meeting Charge:{' '}
+            <span className="text-gray-800">{post.meet_charge}</span> (an
+            additional 10% platform fee will be charged)
+          </p>
+          <p className="text-gray-600">
+            Available Time:{' '}
+            <span className="text-gray-800">{post.available_time}</span>
+          </p>
+          <MeetButton clickevent={addMeetEvent} invited_status={invited} />
+        </div>
+      ) : (
+        <div className="mt-4">
+          <p className="text-gray-600">
+            Meet Charge: <span className="text-gray-800">Not Available</span>
+          </p>
+          <p className="text-gray-600">
+            Available Time: <span className="text-gray-800">Not Available</span>
+          </p>
         </div>
       )}
-      {/* if post.meet_able is false, show the meet_charge and available_time */}  
-      {!post.meet_able && (
-        <div>
-          <p>Meet Charge: Not Available</p>
-          <p>Available Time: Not Available</p>
-        </div>
-      )}
-      <LikeButton clickevent={addLikeEvent} liked_status={liked} />
+      <div className="mt-4">
+        <LikeButton clickevent={addLikeEvent} liked_status={liked} />
+      </div>
     </div>
   );
 }
@@ -104,7 +174,10 @@ function LikeButton({
 }) {
   if (liked_status) {
     return (
-      <Button className="w-50 mt-4 bg-green-500 hover:bg-green-500" disabled={true}>
+      <Button
+        className="w-50 mt-4 bg-green-500 hover:bg-green-500"
+        disabled={true}
+      >
         Liked!
       </Button>
     );
@@ -127,7 +200,10 @@ function MeetButton({
 }) {
   if (invited_status) {
     return (
-      <Button className="w-50 mt-4 bg-green-500 hover:bg-green-500" disabled={true}>
+      <Button
+        className="w-50 mt-4 bg-green-500 hover:bg-green-500"
+        disabled={true}
+      >
         Invited!
       </Button>
     );
