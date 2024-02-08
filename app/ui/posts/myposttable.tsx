@@ -3,6 +3,7 @@ import { ViewPost } from '@/app/ui/posts/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchUserPosts } from '@/app/lib/data';
+import { ViewPostButton } from '@/app/ui/posts/viewPostButton';
 
 export default async function InvoicesTable({
   query
@@ -11,7 +12,7 @@ export default async function InvoicesTable({
 }) {
   const posts = await fetchUserPosts(query);
   return (
-    <div className="mt-6 flow-root">
+    <div className="flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
@@ -25,16 +26,17 @@ export default async function InvoicesTable({
                     <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
+                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id}/>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
-                  {/* <div>
+                {/* <div className="flex w-full items-center justify-between pt-4">
+                  <div>
                     <p className="text-xl font-medium">{post.title}</p>
                     <p>{formatDateToLocal(post.creation_date)}</p>
-                  </div> */}
+                  </div>
                   <div className="flex justify-end gap-2">
                     <ViewPost id={post.id} />
                   </div>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
@@ -97,7 +99,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-3 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ViewPost id={post.id} />
+                    <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id}/>
                     </div>
                   </td>
                 </tr>

@@ -10,7 +10,7 @@ import {
   InvoicesTableSkeleton,
 } from '@/app/ui/skeletons';
 import CardWrapper from '@/app/ui/dashboard/cards';
-import Table from '@/app/ui/dashboard/myposttable';
+import Table from '@/app/ui/posts/myposttable';
 
 export default async function Page({
   searchParams,
@@ -47,10 +47,10 @@ export default async function Page({
           <CardWrapper userId={userId} />
         </Suspense>
       </div>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+      <h1 className={`${lusitana.className} mt-4 mb-4 text-xl md:text-2xl`}>
         My Posts
       </h1>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <Suspense
           key={query + currentPage}
           fallback={<InvoicesTableSkeleton />}
