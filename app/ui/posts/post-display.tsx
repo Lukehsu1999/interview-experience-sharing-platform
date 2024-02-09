@@ -117,6 +117,7 @@ export default function Display({
           <span className="text-gray-800">{post.interview_type}</span>
         </p>
       </div>
+      {/* still using the old likes and views 
       <div className="grid grid-cols-2">
         <p className="text-gray-600">
           Likes: <span className="text-gray-800">{post.likes}</span>
@@ -124,19 +125,22 @@ export default function Display({
         <p className="text-gray-600">
           Unique Views: <span className="text-gray-800">{post.views}</span>
         </p>
-      </div>
+      </div> */}
 
       {post.meet_able ? (
         <div className="mt-4">
+          <div className="grid grid-cols-2">
           <p className="text-gray-600">
             Meeting Charge:{' '}
-            <span className="text-gray-800">{post.meet_charge}</span> (an
-            additional 10% platform fee will be charged)
+            <span className="text-gray-800">{post.meet_charge}</span> 
+            {/* (an additional 10% platform fee will be charged) */}
+             USD for 20 minutes
           </p>
           <p className="text-gray-600">
             Available Time:{' '}
             <span className="text-gray-800">{post.available_time}</span>
           </p>
+          </div>
           <MeetButton clickevent={addMeetEvent} invited_status={invited} />
         </div>
       ) : (
@@ -192,7 +196,7 @@ function MeetButton({
   if (invited_status) {
     return (
       <Button
-        className="w-50 mt-4 bg-green-500 hover:bg-green-500"
+        className="w-50 mt-4 bg-green-500 hover:bg-green-500 justify-center"
         disabled={true}
       >
         Invited!
@@ -200,7 +204,7 @@ function MeetButton({
     );
   } else {
     return (
-      <Button className="w-50 mt-4" onClick={clickevent}>
+      <Button className="w-50 mt-4 justify-center" onClick={clickevent}>
         <HeartIcon className="ml-auto h-5 w-5 text-gray-50" />
         Invite to Meet
       </Button>

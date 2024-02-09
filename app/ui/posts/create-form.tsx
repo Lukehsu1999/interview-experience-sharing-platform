@@ -198,7 +198,7 @@ export default function Form({ userId }: FormProps) {
             htmlFor="available_time"
             className="mb-2 block text-sm font-medium"
           >
-            Enter your available time
+            If yes, when are you available to meet?
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
