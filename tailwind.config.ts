@@ -17,6 +17,15 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        'miumee-color':{
+          400: '#5ABCB9',
+          500: '#036E7A', // logo color
+          600: '#01373D',
+        },
+        'miumeeblue':{
+          400: '#03DAF2',
+          500: '#03C0D5'
+        }
       },
     },
     keyframes: {
