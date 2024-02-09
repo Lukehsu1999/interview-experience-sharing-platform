@@ -23,6 +23,7 @@ const config: Config = {
           600: '#01373D',
         },
         'miumeeblue':{
+          100: '#D5F5F9',
           400: '#03DAF2',
           500: '#03C0D5'
         }
