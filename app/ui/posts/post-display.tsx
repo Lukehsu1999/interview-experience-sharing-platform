@@ -128,7 +128,7 @@ export default function Display({
 
       {post.meet_able ? (
         <div className="mt-4">
-          <div className="grid grid-cols-2">
+          <div className="grid sm:grid-cols-1 lg:grid-cols-2">
           <p className="text-gray-600">
             Meeting Charge:{' '}
             <span className="text-gray-800">{post.meet_charge}</span> 
@@ -169,7 +169,7 @@ function LikeButton({
   if (liked_status) {
     return (
       <Button
-        className="w-50 mt-4 bg-green-500 hover:bg-green-500"
+        className="w-50 mt-4 bg-miumeeblue-500 hover:bg-miumeeblue-500"
         disabled={true}
       >
         Liked!
@@ -195,7 +195,7 @@ function MeetButton({
   if (invited_status) {
     return (
       <Button
-        className="w-50 mt-4 bg-green-500 hover:bg-green-500 justify-center"
+        className="w-50 mt-4 bg-miumeeblue-500 hover:bg-miumeeblue-500 justify-center"
         disabled={true}
       >
         Invited!
