@@ -255,10 +255,9 @@ async function seedMeets(client) {
 async function main() {
   const client = await db.connect();
 
-  //await seedUsers(client);
-  // await seedSharingPosts(client);
-  // await seedLikes(client);
-  // await seedViews(client);
+  await seedSharingPosts(client);
+  await seedLikes(client);
+  await seedViews(client);
   await seedMeets(client);
 
 

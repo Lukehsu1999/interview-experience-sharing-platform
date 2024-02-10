@@ -265,21 +265,7 @@ const sharingposts = [
     meet_able: true,
     meet_charge: 20,
     available_time: 'Monday 10:00am - 12:00pm',
-  },
-  {
-    creator_id: users[6].id,
-    creation_date: '2023-12-25',
-    company: 'Santa Claus',
-    interview_status: 'Others',
-    interview_type: 'Others',
-    title: 'Get an interview to be Santa Claus',
-    content: 'Need to be able to sing and dance, make kids happy, there are 10 kids as interviewers',
-    likes: 100,
-    views: 125,
-    meet_able: true,
-    meet_charge: 20,
-    available_time: 'Monday 10:00am - 12:00pm',
-  },
+  }
 ];
 
 // const revenue = [
