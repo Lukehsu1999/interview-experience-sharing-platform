@@ -73,6 +73,14 @@ export type Meet = {
   received_date: string;
 }
 
+export type PointRecord = {
+  id: string;
+  user_id: string;
+  point: number;
+  action: string;
+  timestamp: string;
+}
+
 // From Invoices Project
 export type Customer = {
   id: string;
