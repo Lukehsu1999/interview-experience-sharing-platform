@@ -187,13 +187,27 @@ async function seedPointRecords(client) {
       CREATE TABLE IF NOT EXISTS pointrecords (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         user_id UUID NOT NULL,
-        point INT NOT NULL,
+        points INT NOT NULL,
         action VARCHAR(255) NOT NULL,
         timestamp DATE NOT NULL
       );
     `;
 
     console.log(`Created "pointrecords" table`);
+
+    // Insert init point data into the "pointrecords" table for all placeholder users
+    const creation_time = new Date().toISOString();
+    const insertedUsers = await Promise.all(
+      users.map(async (user) => {
+        return client.sql`
+        INSERT INTO pointrecords (user_id, points, action, timestamp)
+        VALUES (${user.id}, 10, ${"init"}, ${creation_time})
+        ON CONFLICT (id) DO NOTHING;
+      `;
+      }),
+    );
+
+    console.log(`Initialized ${insertedUsers.length} users points`);
 
     return {
       createTable,

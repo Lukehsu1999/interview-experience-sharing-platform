@@ -65,6 +65,7 @@ export async function fetchCardData(id: string) {
     //const totalPostsPromise = sql`SELECT COUNT(*) FROM invoices`;
     const totalLikesPromise = sql`SELECT COUNT(*) FROM likes WHERE creator_id=${id}`;
     const totalViewsPromise = sql`SELECT COUNT(*) FROM views WHERE creator_id=${id}`;
+    const totalPointsPromise = sql`SELECT SUM(points) AS total_points FROM pointrecords WHERE user_id =${id}`;
     // const invoiceStatusPromise = sql`SELECT
     //      SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
     //      SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
@@ -73,18 +74,19 @@ export async function fetchCardData(id: string) {
     const data = await Promise.all([
       totalLikesPromise,
       totalViewsPromise,
+      totalPointsPromise,
     ]);
 
     const numberOfLikes = Number(data[0].rows[0].count ?? '0');
     const numberOfViews = Number(data[1].rows[0].count ?? '0');
-    const totalCoins = 0;
+    const totalpoints = Number(data[2].rows[0].total_points ?? '0');
     // const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
     // const totalPendingInvoices = formatCurrency(data[2].rows[0].pending ?? '0');
 
     return {
       numberOfLikes,
       numberOfViews,
-      totalCoins,
+      totalpoints,
     };
   } catch (error) {
     console.error('Database Error:', error);

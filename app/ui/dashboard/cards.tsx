@@ -8,7 +8,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
 
 const iconMap = {
-  coin: BanknotesIcon,
+  point: BanknotesIcon,
   like: UserGroupIcon,
   view: ClockIcon,
 };
@@ -17,7 +17,7 @@ export default async function CardWrapper(props: { userId: string }) {
   const {
     numberOfLikes,
     numberOfViews,
-    totalCoins
+    totalpoints
   } = await fetchCardData(props.userId);
   return (
     <>
@@ -25,7 +25,7 @@ export default async function CardWrapper(props: { userId: string }) {
 
       <Card title="Total Likes" value={numberOfLikes} type="like" />
       <Card title="Total Views" value={numberOfViews} type="view" />
-      <Card title="Total Coins" value={totalCoins} type="coin" />
+      <Card title="Total Points" value={totalpoints} type="point" />
       {/* <Card
         title="Total Customers"
         value={numberOfCustomers}
@@ -42,7 +42,7 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'coin' | 'like' | 'view';
+  type: 'point' | 'like' | 'view';
 }) {
   const Icon = iconMap[type];
 

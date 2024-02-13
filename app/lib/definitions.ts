@@ -76,7 +76,7 @@ export type Meet = {
 export type PointRecord = {
   id: string;
   user_id: string;
-  point: number;
+  points: number;
   action: string;
   timestamp: string;
 }
