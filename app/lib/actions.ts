@@ -150,11 +150,22 @@ export async function createUser(
       throw new Error('Email already exists');
     }
     // can insert now if no duplicate name/email
-    const insertionRes = sql`
+    const insertionRes = await sql`
       INSERT INTO users (name, email, password)
       VALUES (${name}, ${email}, ${hashedPassword})
-      ON CONFLICT (id) DO NOTHING;
+      ON CONFLICT (id) DO NOTHING
+      RETURNING id;
     `;
+    const insertedUserId = insertionRes.rows[0].id;
+    console.log('Inserted user ID:', insertedUserId); 
+    // insert init points
+    const creation_time = new Date().toISOString();
+    const initPoint = await sql`
+    INSERT INTO pointrecords (user_id, points, action, timestamp)
+    VALUES (${insertedUserId}, 10, ${"init"}, ${creation_time})
+    ON CONFLICT (id) DO NOTHING;
+  `;
+
     console.log(`Insert users`);
     return 'Success! User created, please login';
   } catch (error: any) {
