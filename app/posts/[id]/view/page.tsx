@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     signIn();
   }
   const userId = await fetchUserIdByNameEmail(
-    String(userName),
+    String(userName), 
     String(userEmail),
   );
 
