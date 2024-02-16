@@ -25,21 +25,19 @@ export default function Display({
   likeStatus: boolean;
   invitedStatus: boolean;
 }) {
-  console.log(post.content);
   {
     /* parse content into lines */
   }
-  const contentLines = post.content.split('+');
-  console.log(contentLines);
-  console.log(
-    'user id: ',
-    userId,
-    ' user name: ',
-    userName,
-    ' user email: ',
-    userEmail,
-  );
-  console.log('display like status: ' + likeStatus);
+  // console.log(contentLines);
+  // console.log(
+  //   'user id: ',
+  //   userId,
+  //   ' user name: ',
+  //   userName,
+  //   ' user email: ',
+  //   userEmail,
+  // );
+  // console.log('display like status: ' + likeStatus);
   const [liked, setLiked] = useState(likeStatus);
   const [invited, setInvited] = useState(invitedStatus);
   const [content, setContent] = useState(post.content);

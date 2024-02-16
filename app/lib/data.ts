@@ -326,9 +326,16 @@ export async function fetchPostById(id: string) {
     JOIN users ON sharingposts.creator_id = users.id
     WHERE sharingposts.id = ${id};
     `;
-
+    const likes = await sql`
+      SELECT COUNT(*) FROM likes WHERE post_id = ${id}
+    `;
+    const views = await sql`
+      SELECT COUNT(*) FROM views WHERE post_id = ${id}
+    `;
     const post = data.rows.map((post) => ({
       ...post,
+      likes: likes.rows[0].count,
+      views: views.rows[0].count,
     }));
 
     return post[0];

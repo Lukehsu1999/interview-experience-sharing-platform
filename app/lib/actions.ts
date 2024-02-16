@@ -231,13 +231,11 @@ export async function addView(
 ) {
   noStore();
   try {
-    console.log(post_id, viewer_id);
     const viewCnt = await sql`
       SELECT COUNT(*) AS CNT
       FROM views
       WHERE post_id = ${post_id} AND viewer_id = ${viewer_id};
     `;
-    console.log(viewCnt);
     const viewCntNum: number = viewCnt.rows[0].cnt as number;
     console.log(viewCntNum);
     if (viewCntNum >= 1) {
