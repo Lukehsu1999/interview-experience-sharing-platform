@@ -63,21 +63,20 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
-        <RegisterButton />
+        <div className="mb-4">
+          <RegisterButton />
+        </div>
         <div
-          className="flex h-8 items-end space-x-1"
+          className="flex h-15 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
           {errorMessage && (
             <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <ExclamationCircleIcon className="w-5 text-red-500" />
+              <p className="text-sm text-red-500">{errorMessage + " Forget your password? Send to miumee2024@gmail.com your new password using the email you registered"}</p>
             </>
           )}
-        </div>
-        <div className="flex h-8 items-end space-x-1">
-          {/* Add form errors here */}
         </div>
       </div>
     </form>
