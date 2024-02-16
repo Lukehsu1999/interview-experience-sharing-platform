@@ -428,9 +428,9 @@ export async function fetchLikeStatus(postId: string, likerId: string) {
 export async function fetchMeetStatus(postId: string, seekerId: string) {
   noStore();
   try {
-    console.log(postId, seekerId);
+    //console.log(postId, seekerId);
     const meetStatus = await sql`SELECT COUNT(*) AS CNT FROM meets WHERE post_id=${postId} AND seeker_id=${seekerId}`;
-    console.log("meetStatus fetchMeetStatus: ",meetStatus.rows[0].cnt);
+    //console.log("meetStatus fetchMeetStatus: ",meetStatus.rows[0].cnt);
     return meetStatus.rows[0].cnt;
   } catch (error) {
     console.error('Failed to fetch meet status:', error);

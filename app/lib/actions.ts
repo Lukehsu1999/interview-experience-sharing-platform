@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { unstable_noStore as noStore } from 'next/cache';
 const bcrypt = require('bcrypt');
 
 const FormSchema = z.object({
@@ -205,6 +206,12 @@ export async function addLike(
         VALUES (${post_id}, ${creator_id}, ${liker_id});
       `;
       console.log(`Insert likes`);
+      const creation_time = new Date().toISOString();
+      const addLikePoints = await sql`
+      INSERT INTO pointrecords (user_id, points, action, timestamp)
+      VALUES (${creator_id}, 5, ${"Like Point"}, ${creation_time})
+      ON CONFLICT (id) DO NOTHING;
+    `;
       return 'Success! Like added';
     }
   } catch (error: any) {
@@ -222,25 +229,90 @@ export async function addView(
   creator_id: string,
   viewer_id: string,
 ) {
+  noStore();
   try {
-    const insertView = await sql`
-      INSERT INTO views (post_id, creator_id, viewer_id)
-      VALUES (${post_id}, ${creator_id}, ${viewer_id});
+    console.log(post_id, viewer_id);
+    const viewCnt = await sql`
+      SELECT COUNT(*) AS CNT
+      FROM views
+      WHERE post_id = ${post_id} AND viewer_id = ${viewer_id};
     `;
-
-    console.log(`Insert views`);
-  } catch (error: any) {
-    // Check if the error is related to unique constraint violation
-    if (error.code === '23505') {
-      console.log('View already exists');
-      return 'View already exists'; // Handle the case where the view already exists
+    console.log(viewCnt);
+    const viewCntNum: number = viewCnt.rows[0].cnt as number;
+    console.log(viewCntNum);
+    if (viewCntNum >= 1) {
+      console.log('Already viewed');
+      throw new Error('Already viewed');
     }
-    console.log('Database insert');
-
-    console.error('Database Insertion View error:', error);
-    return 'Database Insertion View error';
+    if (viewCntNum == 0) {
+      const insertView = await sql`
+        INSERT INTO views (post_id, creator_id, viewer_id)
+        VALUES (${post_id}, ${creator_id}, ${viewer_id});
+      `;
+      console.log(`Insert views`);
+      const creation_time = new Date().toISOString();
+      const addLikePoints = await sql`
+      INSERT INTO pointrecords (user_id, points, action, timestamp)
+      VALUES (${creator_id}, 1, ${"View Point"}, ${creation_time})
+      ON CONFLICT (id) DO NOTHING;
+    `;
+      return 'Success! View added';
+    }
+  } catch (error: any) {
+    if (error instanceof Error) {
+      console.error('Already viewed');
+      return error.message;
+    } else {
+      console.error('Add View: Insert into Database error');
+      return 'Add View: Database Insertion error';
+    }
   }
 }
+// export async function addView(
+//   post_id: string,
+//   creator_id: string,
+//   viewer_id: string,
+// ) {
+//   try {
+//     const insertView = await sql`
+//       INSERT INTO views (post_id, creator_id, viewer_id)
+//       VALUES (${post_id}, ${creator_id}, ${viewer_id});
+//     `;
+
+//     console.log(`Insert views`);
+//   } catch (error: any) {
+//     // Check if the error is related to unique constraint violation
+//     if (error.code === '23505') {
+//       console.log('View already exists');
+//       return 'View already exists'; // Handle the case where the view already exists
+//     }
+//     console.log('view already exists');
+
+//     console.error('Database Insertion View error:', error);
+//     return 'Database Insertion View error';
+//   }
+// }
+// export async function addView(post_id:string, creator_id:string, viewer_id:string) {
+//   const result = await sql`
+//     WITH inserted AS (
+//       INSERT INTO views (post_id, creator_id, viewer_id)
+//       VALUES (${post_id}, ${creator_id}, ${viewer_id})
+//       ON CONFLICT (post_id, viewer_id) DO NOTHING
+//       RETURNING *
+//     )
+//     SELECT * FROM inserted;
+//   `;
+
+//   // Check the result
+//   if (result.rows.length === 0) {
+//     console.log('View already exists');
+//     return; // Indicates a conflict occurred
+//   } else {
+//     console.log('Insert successful');
+//     return; // Return the inserted row
+//   }
+// }
+
 export async function addMeet(
   post_id: string,
   seeker_id: string,
