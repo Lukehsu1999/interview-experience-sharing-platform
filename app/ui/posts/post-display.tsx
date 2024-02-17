@@ -196,7 +196,7 @@ function MeetButton({
         className="w-50 mt-4 bg-miumeeblue-500 hover:bg-miumeeblue-500 justify-center"
         disabled={true}
       >
-        Invited!
+        Invited! We will connect you and the content creator through Email
       </Button>
     );
   } else {

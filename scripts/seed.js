@@ -24,22 +24,22 @@ ADD CONSTRAINT unique_name_email_constraint UNIQUE (name, email);
     console.log(`Created "users" table`);
 
     // Insert data into the "users" table
-    const insertedUsers = await Promise.all(
-      users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-      }),
-    );
+    // const insertedUsers = await Promise.all(
+    //   users.map(async (user) => {
+    //     const hashedPassword = await bcrypt.hash(user.password, 10);
+    //     return client.sql`
+    //     INSERT INTO users (id, name, email, password)
+    //     VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
+    //     ON CONFLICT (id) DO NOTHING;
+    //   `;
+    //   }),
+    // );
 
-    console.log(`Seeded ${insertedUsers.length} users`);
+    // console.log(`Seeded ${insertedUsers.length} users`);
 
     return {
-      createTable,
-      users: insertedUsers,
+      createTable
+      //users: insertedUsers,
     };
   } catch (error) {
     console.error('Error seeding users:', error);
@@ -74,21 +74,21 @@ async function seedSharingPosts(client) {
     console.log(`Created "sharingposts" table`);
 
     // Insert data into the "invoices" table
-    const insertedSharingposts = await Promise.all(
-      sharingposts.map(
-        (post) => client.sql`
-        INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
-        VALUES (${post.creator_id}, ${post.creation_date}, ${post.company}, ${post.interview_status}, ${post.interview_type}, ${post.title}, ${post.content}, ${post.likes}, ${post.views}, ${post.meet_able}, ${post.meet_charge}, ${post.available_time})
-        ON CONFLICT (id) DO NOTHING;
-      `,
-      ),
-    );
+    // const insertedSharingposts = await Promise.all(
+    //   sharingposts.map(
+    //     (post) => client.sql`
+    //     INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
+    //     VALUES (${post.creator_id}, ${post.creation_date}, ${post.company}, ${post.interview_status}, ${post.interview_type}, ${post.title}, ${post.content}, ${post.likes}, ${post.views}, ${post.meet_able}, ${post.meet_charge}, ${post.available_time})
+    //     ON CONFLICT (id) DO NOTHING;
+    //   `,
+    //   ),
+    // );
 
-    console.log(`Seeded ${insertedSharingposts.length} posts`);
+    // console.log(`Seeded ${insertedSharingposts.length} posts`);
 
     return {
-      createTable,
-      sharingposts: insertedSharingposts,
+      createTable
+      //sharingposts: insertedSharingposts,
     };
   } catch (error) {
     console.error('Error seeding sharingposts:', error);
@@ -196,18 +196,18 @@ async function seedPointRecords(client) {
     console.log(`Created "pointrecords" table`);
 
     // Insert init point data into the "pointrecords" table for all placeholder users
-    const creation_time = new Date().toISOString();
-    const insertedUsers = await Promise.all(
-      users.map(async (user) => {
-        return client.sql`
-        INSERT INTO pointrecords (user_id, points, action, timestamp)
-        VALUES (${user.id}, 10, ${"init"}, ${creation_time})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-      }),
-    );
+    // const creation_time = new Date().toISOString();
+    // const insertedUsers = await Promise.all(
+    //   users.map(async (user) => {
+    //     return client.sql`
+    //     INSERT INTO pointrecords (user_id, points, action, timestamp)
+    //     VALUES (${user.id}, 10, ${"init"}, ${creation_time})
+    //     ON CONFLICT (id) DO NOTHING;
+    //   `;
+    //   }),
+    // );
 
-    console.log(`Initialized ${insertedUsers.length} users points`);
+    // console.log(`Initialized ${insertedUsers.length} users points`);
 
     return {
       createTable,
@@ -222,12 +222,12 @@ async function seedPointRecords(client) {
 async function main() {
   const client = await db.connect();
   
-  // await seedUsers(client);
-  // await seedSharingPosts(client);
-  // await seedLikes(client);
-  // await seedViews(client);
+  await seedUsers(client);
+  await seedSharingPosts(client);
+  await seedLikes(client);
+  await seedViews(client);
   await seedMeets(client);
-  // await seedPointRecords(client);
+  await seedPointRecords(client);
 
 
   await client.end();
