@@ -140,7 +140,7 @@ export default function Form({ userId }: FormProps) {
         {/* Post Content */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Enter Post Content
+            Enter Post Content. We encourage you to type it somewhere and paste it here.
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
