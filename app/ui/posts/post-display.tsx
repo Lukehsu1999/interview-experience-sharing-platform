@@ -80,8 +80,8 @@ export default function Display({
         post.email,
         post.meet_charge,
         0,
-        'Pending',
-        'Unpaid',
+        'pending',
+        'unpaid',
       ); //sequence wrong!
       console.log(res);
       setInvited(true);

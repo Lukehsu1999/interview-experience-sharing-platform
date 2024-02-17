@@ -8,7 +8,8 @@
     "start": "next start",
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "resetPwd": "node -r dotenv/config ./scripts/resetPwd.js",
-    "meets": "node -r dotenv/config ./scripts/getPendingMeets.js"
+    "pendingMeets": "node -r dotenv/config ./scripts/getPendingMeets.js",
+    "updateMeets": "node -r dotenv/config ./scripts/setMeetsInvited.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

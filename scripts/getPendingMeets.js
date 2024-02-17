@@ -10,7 +10,7 @@ async function getPendingMeetsEmailList(client) {
       "SELECT * FROM meets WHERE meet_status='pending';"
     );
     // Write emails informing the seeker_name
-    console.log("Pending meets: ", pendingmeets.rows)
+    console.log("Pending meets: ", pendingmeets.rows, " Remember to setMeetsInvited!");
   } catch (error) {
     console.error('Error getting pending meets:', error);
     throw error;
