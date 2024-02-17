@@ -9,42 +9,42 @@ export default function Page() {
       <div className="flex grid grid-cols-1 items-center justify-center p-6 md:px-28 md:py-12">
         {/* Add Hero Images Here */}
         <Image
-          src="/About_1.png"
+          src="/About-1.png"
           width={large_width}
           height={large_height}
           className="mt-4 hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
         />
         <Image
-          src="/About_1.png"
+          src="/About-1.png"
           width={small_width}
           height={small_height}
           className="mt-4 block md:hidden"
           alt="Screenshots of the dashboard project showing mobile version"
         />
         <Image
-          src="/About_2.png"
+          src="/About-2.png"
           width={large_width}
           height={large_height}
           className="mt-4 hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
         />
         <Image
-          src="/About_2.png"
+          src="/About-2.png"
           width={small_width}
           height={small_height}
           className="mt-4 block md:hidden"
           alt="Screenshots of the dashboard project showing mobile version"
         />
         <Image
-          src="/Contest_Rules.png"
+          src="/Contest-Rules.png"
           width={large_width}
           height={large_height}
           className="mt-4 hidden md:block"
           alt="Screenshots of the dashboard project showing desktop version"
         />
         <Image
-          src="/Contest_Rules.png"
+          src="/Contest-Rules.png"
           width={small_width}
           height={small_height}
           className="mt-4 block md:hidden"
