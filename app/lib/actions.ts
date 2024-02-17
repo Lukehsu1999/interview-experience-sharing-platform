@@ -15,6 +15,9 @@ const FormSchema = z.object({
   creation_date: z.string(),
   company: z.string(),
   interview_status: z.enum([
+    'Full Time',
+    'Part Time',
+    'Internship',
     'Phone interview',
     'Online Assessment',
     'First Round',
@@ -26,6 +29,7 @@ const FormSchema = z.object({
     'Others',
   ]),
   interview_type: z.enum([
+    'Work',
     'Technical Interview',
     'Behavioral Interview',
     'Case Interview',
