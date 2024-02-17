@@ -91,7 +91,7 @@ export default function Form({ userId }: FormProps) {
         {/* Select interview status */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Select an interview status
+            Select an interview/work status
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -100,14 +100,15 @@ export default function Form({ userId }: FormProps) {
                 name="interview_status"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2"
               >
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Internship">Internship</option>
                 <option value="Phone interview">Phone interview</option>
                 <option value="Online Assessment">Online Assessment</option>
                 <option value="First Round">First Round</option>
                 <option value="Second Round">Second Round</option>
                 <option value="Third Round">Third Round</option>
                 <option value="Final Round">Final Round</option>
-                <option value="Offered">Offered</option>
-                <option value="Rejected">Rejected</option>
                 <option value="Others">Others</option>
               </select>
             </div>
@@ -116,7 +117,7 @@ export default function Form({ userId }: FormProps) {
         {/* Interview Type */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Select an interview type
+            Select an interview/work type
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -125,6 +126,7 @@ export default function Form({ userId }: FormProps) {
                 name="interview_type"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2"
               >
+                <option value="Work">Work</option>
                 <option value="Technical Interview">Technical Interview</option>
                 <option value="Behavioral Interview">
                   Behavioral Interview
@@ -198,7 +200,7 @@ export default function Form({ userId }: FormProps) {
             htmlFor="available_time"
             className="mb-2 block text-sm font-medium"
           >
-            If yes, when are you available to meet?
+            If yes, when are you usually available to meet?
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
