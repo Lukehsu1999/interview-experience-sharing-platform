@@ -74,7 +74,7 @@ export default function LoginForm() {
           {errorMessage && (
             <>
               <ExclamationCircleIcon className="w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage + " Forget your password? Send to miumee2024@gmail.com your new password using the email you registered"}</p>
+              <p className="text-sm text-red-500">{errorMessage + " Forget your password? Send to th2881@columbia.edu your new password using the email you registered"}</p>
             </>
           )}
         </div>
