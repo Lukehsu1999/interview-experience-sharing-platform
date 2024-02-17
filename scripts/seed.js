@@ -226,8 +226,8 @@ async function main() {
   // await seedSharingPosts(client);
   // await seedLikes(client);
   // await seedViews(client);
-  // await seedMeets(client);
-  await seedPointRecords(client);
+  await seedMeets(client);
+  // await seedPointRecords(client);
 
 
   await client.end();
