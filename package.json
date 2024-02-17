@@ -9,7 +9,8 @@
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "resetPwd": "node -r dotenv/config ./scripts/resetPwd.js",
     "pendingMeets": "node -r dotenv/config ./scripts/getPendingMeets.js",
-    "updateMeets": "node -r dotenv/config ./scripts/setMeetsInvited.js"
+    "updateMeets": "node -r dotenv/config ./scripts/setMeetsInvited.js",
+    "ranking": "node -r dotenv/config ./scripts/getUserPointRanking.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
