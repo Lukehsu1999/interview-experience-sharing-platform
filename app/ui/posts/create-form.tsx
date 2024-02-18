@@ -188,6 +188,7 @@ export default function Form({ userId }: FormProps) {
                 id="meet_charge"
                 name="meet_charge"
                 type="number"
+                min="0"
                 placeholder="Enter an integer amount of usd dollar for meet_charge"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
