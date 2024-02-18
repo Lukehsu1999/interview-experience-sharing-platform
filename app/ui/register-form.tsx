@@ -16,12 +16,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function LoginForm() {
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [errorMessage, dispatch] = useFormState(createUser, undefined);
-
-  const handleRegistrationSuccess = () =>{
-    setIsRegistered(true);
-  }
+  const [registerMessage, dispatch] = useFormState(createUser, undefined);
 
   return (
     <form action={dispatch} className="space-y-3">
@@ -89,28 +84,28 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        {!isRegistered && <RegisterButton />}
-        {!isRegistered && <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+        {(!registerMessage || registerMessage !== "Success! User created, please login") && <RegisterButton />}
+        {(!registerMessage || registerMessage !== "Success! User created, please login") && <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
           Or, go back to login page
         </label>}
         <LoginButton />
         <div
-          className="flex h-8 items-end space-x-1"
+          className="flex h-15 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
-          {errorMessage &&
-            errorMessage != 'Success! User created, please login' && (
+          {registerMessage &&
+            registerMessage != 'Success! User created, please login' && (
               <>
                 <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                <p className="text-sm text-red-500">{errorMessage}</p>
+                <p className="text-sm text-red-500">{registerMessage}</p>
               </>
             )}
-          {errorMessage &&
-            errorMessage == 'Success! User created, please login' && (
+          {registerMessage &&
+            registerMessage == 'Success! User created, please login' && (
               <>
                 <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                <p className="text-sm text-green-500">{errorMessage}</p>
+                <p className="text-sm text-green-500">{registerMessage}</p>
               </>
             )}
         </div>
