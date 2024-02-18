@@ -13,10 +13,10 @@ export default function Page() {
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-start gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Miumee Interview Experience Sharing Platform.</strong>{' '}
-            This is a prototype for letting people to create sharing posts on
-            interview experience, regardless of the company, position, and
-            industry.
+            <strong>Welcome to Miumee Interview/Work Experience Sharing Platform.</strong>{' '}
+            We aim to build a sustainable and supportive network of work related information.
+            We aim to provide experience seekers accurate and high quality contents.
+            We believe that experience sharers should be rewarded for their contribution.
           </p>
           <Link
             href="/login"
