@@ -63,6 +63,9 @@ export default function LoginForm() {
           </div>
         </div>
         <LoginButton />
+        <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+          Or, go to register page
+        </label>
         <div className="mb-4">
           <RegisterButton />
         </div>

@@ -6,16 +6,22 @@ import {
   KeyIcon,
   ExclamationCircleIcon,
   UserCircleIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { createUser } from '@/app/lib/actions';
 import Link from 'next/link';
+import React, { useState } from 'react';
 
 export default function LoginForm() {
+  const [isRegistered, setIsRegistered] = useState(false);
   const [errorMessage, dispatch] = useFormState(createUser, undefined);
+
+  const handleRegistrationSuccess = () =>{
+    setIsRegistered(true);
+  }
 
   return (
     <form action={dispatch} className="space-y-3">
@@ -24,7 +30,7 @@ export default function LoginForm() {
           Welcome! Register a new account
         </h1>
         <div className="w-full">
-        <div>
+          <div>
             <label
               className="mb-3 mt-5 block text-xs font-medium text-gray-900"
               htmlFor="name"
@@ -83,25 +89,30 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-        <RegisterButton />
+        {!isRegistered && <RegisterButton />}
+        {!isRegistered && <label className="mb-3 mt-5 block text-xs font-medium text-gray-900">
+          Or, go back to login page
+        </label>}
         <LoginButton />
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
-          {errorMessage && (errorMessage!="Success! User created, please login") &&(
-            <>
-              <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
-            </>
-          )}
-          {errorMessage && (errorMessage=="Success! User created, please login") && (
-            <>
-              <CheckCircleIcon className="h-5 w-5 text-green-500" />
-              <p className="text-sm text-green-500">{errorMessage}</p>
-            </>
-          )}
+          {errorMessage &&
+            errorMessage != 'Success! User created, please login' && (
+              <>
+                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <p className="text-sm text-red-500">{errorMessage}</p>
+              </>
+            )}
+          {errorMessage &&
+            errorMessage == 'Success! User created, please login' && (
+              <>
+                <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                <p className="text-sm text-green-500">{errorMessage}</p>
+              </>
+            )}
         </div>
         <div className="flex h-8 items-end space-x-1">
           {/* Add form errors here */}
@@ -114,7 +125,10 @@ export default function LoginForm() {
 function RegisterButton() {
   const { pending } = useFormStatus();
   return (
-    <Button className="mt-4 w-full bg-miumeeblue-500 hover:bg-miumeeblue-400" aria-disabled={pending}>
+    <Button
+      className="mt-4 w-full bg-miumeeblue-500 hover:bg-miumeeblue-400"
+      aria-disabled={pending}
+    >
       Register <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>
   );
