@@ -65,6 +65,7 @@ export default function Form({ userId }: FormProps) {
                 id="company"
                 name="company"
                 type="text"
+                required
                 placeholder="Enter the company name here"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
@@ -82,6 +83,7 @@ export default function Form({ userId }: FormProps) {
                 id="title"
                 name="title"
                 type="title"
+                required
                 placeholder="Enter Post title here"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
