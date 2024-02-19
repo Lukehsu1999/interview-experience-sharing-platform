@@ -39,7 +39,7 @@ const FormSchema = z.object({
   content: z.string(),
   likes: z.coerce.number(),
   views: z.coerce.number(),
-  meet_able: z.coerce.boolean(),
+  meet_able: z.string().transform((val) => val === "true"),
   meet_charge: z.coerce.number(),
   available_time: z.string(),
 });
