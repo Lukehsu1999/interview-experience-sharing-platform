@@ -35,7 +35,7 @@ export default async function Page({
         <h1 className={`${lusitana.className} text-2xl`}>Welcome to Miumee, {userName} <br></br>Share your experience in interview, work, research, and school admission</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search posts..." />
+        <Search placeholder="Search posts by Company, Title, Status, Type..." />
         <CreatePost />
       </div>
       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
