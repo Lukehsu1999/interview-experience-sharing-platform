@@ -128,6 +128,8 @@ export default function Form({ userId }: FormProps) {
                 name="interview_type"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2"
               >
+                <option value="School Admission">School Admission</option>
+                <option value="Research">Research</option>
                 <option value="Work">Work</option>
                 <option value="Technical Interview">Technical Interview</option>
                 <option value="Behavioral Interview">

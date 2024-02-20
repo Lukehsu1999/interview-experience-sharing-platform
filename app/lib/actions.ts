@@ -29,6 +29,8 @@ const FormSchema = z.object({
     'Others',
   ]),
   interview_type: z.enum([
+    'School Admission',
+    'Research',
     'Work',
     'Technical Interview',
     'Behavioral Interview',

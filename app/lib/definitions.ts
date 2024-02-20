@@ -8,7 +8,7 @@ export type User = {
   email: string;
   password: string;
 };
-
+// when update definition, also update create-form and create-form z checking
 export type SharingPost = {
   id: string;
   creator_id: string;
@@ -30,8 +30,8 @@ export type PostsTable = {
   creator_id: string;
   creation_date: string;
   company: string;
-  interview_status: 'Full Time' |  'Part Time' |'Internship' | 'Phone interview' | 'Online Assessment' | 'First Round' | 'Second Round' | 'Third Round' | 'Final Round' | 'Others';
-  interview_type: 'Work' | 'Technical Interview' | 'Behavioral Interview' | 'Case Interview' | 'Others';
+  interview_status: 'Full Time' |  'Part Time' | 'Internship' | 'Phone interview' | 'Online Assessment' | 'First Round' | 'Second Round' | 'Third Round' | 'Final Round' | 'Others';
+  interview_type: 'School Admission' |'Research' |'Work' | 'Technical Interview' | 'Behavioral Interview' | 'Case Interview' | 'Others';
   title: string;
   content: string;
   likes: number; // outdated
