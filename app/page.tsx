@@ -35,14 +35,14 @@ export default function Page() {
           {/* Add Hero Images Here */}
           <p className={`text-xl text-white md:text-3xl md:leading-normal`}><strong>Share, Meet, Earn $150!</strong></p>
           <Image
-            src="/Contest-Rules.png"
+            src="/Contest-Rules-2.png"
             width={1000}
             height={760}
             className="hidden md:block mt-4"
             alt="Screenshots of the dashboard project showing desktop version"
           />
           <Image
-            src="/Contest-Rules.png"
+            src="/Contest-Rules-2.png"
             width={560}
             height={430}
             className="md:hidden block mt-4"

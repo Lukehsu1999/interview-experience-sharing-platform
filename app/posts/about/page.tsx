@@ -8,6 +8,26 @@ export default function Page() {
     <main className="flex min-h-screen flex-col bg-miumee-color-400 p-6">
       <div className="flex grid grid-cols-1 items-center justify-center p-6 md:px-28 md:py-12">
         {/* Add Hero Images Here */}
+        <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
+          <strong>Contest Rules</strong>
+        </p>
+        <Image
+          src="/Contest-Rules-2.png"
+          width={large_width}
+          height={large_height}
+          className="mt-4 hidden md:block"
+          alt="Screenshots of the dashboard project showing desktop version"
+        />
+        <Image
+          src="/Contest-Rules-2.png"
+          width={small_width}
+          height={small_height}
+          className="mt-4 block md:hidden"
+          alt="Screenshots of the dashboard project showing mobile version"
+        />
+        <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
+          <strong>About Miumee</strong>
+        </p>
         <Image
           src="/About-1.png"
           width={large_width}
@@ -22,6 +42,9 @@ export default function Page() {
           className="mt-4 block md:hidden"
           alt="Screenshots of the dashboard project showing mobile version"
         />
+        <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
+          <strong>How to make money on Miumee</strong>
+        </p>
         <Image
           src="/About-2.png"
           width={large_width}
@@ -31,20 +54,6 @@ export default function Page() {
         />
         <Image
           src="/About-2.png"
-          width={small_width}
-          height={small_height}
-          className="mt-4 block md:hidden"
-          alt="Screenshots of the dashboard project showing mobile version"
-        />
-        <Image
-          src="/Contest-Rules.png"
-          width={large_width}
-          height={large_height}
-          className="mt-4 hidden md:block"
-          alt="Screenshots of the dashboard project showing desktop version"
-        />
-        <Image
-          src="/Contest-Rules.png"
           width={small_width}
           height={small_height}
           className="mt-4 block md:hidden"
