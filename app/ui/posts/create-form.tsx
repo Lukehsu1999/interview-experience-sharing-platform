@@ -57,7 +57,7 @@ export default function Form({ userId }: FormProps) {
         {/* Enter Company */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Enter company name
+            Enter company/organization name
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -93,7 +93,7 @@ export default function Form({ userId }: FormProps) {
         {/* Select interview status */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Select an interview/work status
+            Select an status
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
@@ -119,7 +119,7 @@ export default function Form({ userId }: FormProps) {
         {/* Interview Type */}
         <div className="mb-4">
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
-            Select an interview/work type
+            Select a type
           </label>
           <div className="relative mt-2 rounded-md">
             <div className="relative">
