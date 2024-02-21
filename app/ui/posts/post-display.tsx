@@ -38,6 +38,9 @@ export default function Display({
   //   userEmail,
   // );
   // console.log('display like status: ' + likeStatus);
+
+  // For zoe :
+  const zoePostId = '42b51cae-b462-422b-96a1-589a36ad5f68';
   const [liked, setLiked] = useState(likeStatus);
   const [invited, setInvited] = useState(invitedStatus);
   const [content, setContent] = useState(post.content);
@@ -153,6 +156,13 @@ export default function Display({
       <div className="mt-4">
         <LikeButton clickevent={addLikeEvent} liked_status={liked} />
       </div>
+      {(post.id == zoePostId) &&
+       <div className="text-md text-blue-500">
+        Got follow-up questions? <br></br>
+        Buy this creator a coffee ☕ 🥐 to be added to her GroupMe group. <br></br>
+        Please Zelle 508-902-8020 seven dollars with your GroupMe number in comment and you will be added to the group within 24 hours
+       </div>
+      }
     </div>
   );
 }

@@ -48,6 +48,17 @@ export default async function Page({
           <CardWrapper userId={userId} />
         </Suspense>
       </div>
+      <div
+          className="flex h-15 items-end space-x-1"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {
+            <>
+              <p className="text-sm text-blue-500">{"1 view = 1 point; 1 like = 5 points"}</p>
+            </>
+          }
+        </div>
       <h1 className={`${lusitana.className} mt-4 mb-4 text-xl md:text-2xl`}>
         My Posts
       </h1>
