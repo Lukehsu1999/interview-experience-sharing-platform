@@ -55,7 +55,7 @@ export default async function Page({
         >
           {
             <>
-              <p className="text-sm text-blue-500">{"1 view = 1 point; 1 like = 5 points"}</p>
+              <p className="text-sm text-blue-500">{"1 view = 1 point; 1 like = 5 points. In the future we hope to reward content creators for the sustainability of the website, for now, check out the Announcements page for the awards we can afford for now"}</p>
             </>
           }
         </div>
