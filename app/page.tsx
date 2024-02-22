@@ -13,13 +13,16 @@ export default function Page() {
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-start gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Miumee - the Experience Sharing Platform.</strong>{' '}<br></br>
-            Come here to share your experiences in <br></br>
+            <strong>Welcome to Miumee</strong><br></br>
+            Student Career-Development Sharing Platform<br></br>
+            <br></br>
+            <span className='text-miumee-color-400 font-bold'>Come here to share your experiences in</span><br></br>
+            {/* Come here to share your experiences in <br></br> */}
             <span className='text-miumee-color-500 font-bold'>🗣️ Interview,</span><br></br>
             <span className='text-miumee-color-500 font-bold'>💼 Work,</span><br></br>
             <span className='text-miumee-color-500 font-bold'>🏫 School Admission,</span><br></br>
             <span className='text-miumee-color-500 font-bold'>👩‍🔬 Research</span><br></br>
-            <span className='text-miumee-color-400 font-bold'>and Earn Money 💵!</span><br></br>
+            <span className='text-miumee-color-400 font-bold'>Help People and Earn Money 💵!</span><br></br>
             {/* We aim to build a sustainable and supportive network. <br></br>
             Providing experience seekers accurate and high quality contents.<br></br> */}
           
@@ -33,7 +36,7 @@ export default function Page() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12 grid grid-cols-1">
           {/* Add Hero Images Here */}
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}><strong>Share, Meet, Earn $150!</strong></p>
+          <p className={`text-xl text-white md:text-3xl md:leading-normal`}><strong>Help people by making a post and win $150!</strong></p>
           <Image
             src="/Contest-Rules-2.png"
             width={1000}
