@@ -152,7 +152,7 @@ export default function Form({ userId }: FormProps) {
                 id="content"
                 name="content"
                 ref={textareaRef}
-                placeholder="Share your experience here~"
+                placeholder="Share your experience here~ a paragraph or two will be appreciated"
                 onChange={handleContentChange}
                 className="w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-500"
                 style={{ minHeight: '150px' }}
