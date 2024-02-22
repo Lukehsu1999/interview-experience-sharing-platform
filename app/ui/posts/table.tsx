@@ -7,11 +7,13 @@ import { fetchFilteredPosts } from '@/app/lib/data';
 export default async function InvoicesTable({
   query,
   currentPage,
-  viewer_id
+  viewer_id,
+  unlimitedView,
 }: {
   query: string;
   currentPage: number;
   viewer_id: string;
+  unlimitedView: boolean;
 }) {
   const posts = await fetchFilteredPosts(query, currentPage);
 
@@ -30,7 +32,7 @@ export default async function InvoicesTable({
                     <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
-                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
+                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id} unlimitedView={unlimitedView}/>
                 </div>
                 {/* <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -103,7 +105,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-3 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
+                      <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id} unlimitedView={unlimitedView}/>
                     </div>
                   </td>
                 </tr>

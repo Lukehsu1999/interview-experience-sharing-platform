@@ -12,6 +12,7 @@ import {
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
+
 export async function fetchRevenue() {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -53,6 +54,17 @@ export async function fetchLatestInvoices() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
+  }
+}
+
+export async function fetchUnlimitedViewStatus(id: string){
+  noStore();
+  try {
+    return true;
+  } catch(error){
+    console.error('Database Error @ fetchUnlimitedViewStatus:', error);
+    return true; // return true in case something goes wrong
+    throw new Error('Failed to fetch unlimited View Status.');
   }
 }
 

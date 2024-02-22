@@ -10,16 +10,22 @@ import Link from 'next/link';
 import { addView } from '@/app/lib/actions';
 import { useRouter } from 'next/navigation'
 
-export function ViewPostButton({ post_id, creator_id, viewer_id }: { post_id: string; creator_id: string; viewer_id: string }) {
+export function ViewPostButton({ post_id, creator_id, viewer_id, unlimitedView }: { post_id: string; creator_id: string; viewer_id: string; unlimitedView: boolean }) {
   const router = useRouter();
   return (
     <button
       onClick={async () => {
         try {
-          console.log('viewed');
-          const res = await addView(post_id, creator_id, viewer_id);
-          console.log(res);
-          router.push(`/posts/${post_id}/view`);
+          if (unlimitedView){
+            console.log('viewed');
+            const res = await addView(post_id, creator_id, viewer_id);
+            console.log(res);
+            router.push(`/posts/${post_id}/view`);
+          }
+          else{
+            console.log('ask user to create a post for unlimited view');
+            router.push(`/posts/create`);
+          }
         } catch (err) {
           console.log(err);
         }
