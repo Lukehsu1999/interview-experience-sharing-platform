@@ -57,16 +57,39 @@ export async function fetchLatestInvoices() {
   }
 }
 
-export async function fetchUnlimitedViewStatus(id: string){
-  noStore();
+export async function fetchUnlimitedViewStatus(id: string) {
+  noStore(); // Assuming this is a function call relevant to your setup.
   try {
-    return true;
-  } catch(error){
+    const result = await sql`
+    SELECT status FROM viewstatus WHERE user_id = ${id};
+    `;
+    if (result.rows.length > 0) {
+      // Assuming there's only one entry per user_id due to the UNIQUE constraint.
+      const status = result.rows[0].status;
+      if (status=='new'){
+        const setStatusLimited = await sql`UPDATE viewstatus SET status = 'limited' WHERE user_id = ${id}`;
+        return true;
+      }
+      else if(status=='limited'){
+        return false;
+      }
+      else{
+        // unlimited
+        return true;
+      }
+      // Return the status of the given user_id.
+    } else {
+      console.log('No status found for the given user_id. Return default true');
+      return true; // Return null if no status is found.
+    }
+  } catch (error) {
     console.error('Database Error @ fetchUnlimitedViewStatus:', error);
-    return true; // return true in case something goes wrong
-    throw new Error('Failed to fetch unlimited View Status.');
+    // It might be better to throw the error to let the caller handle it,
+    // but since you want to return true in case of an error:
+    return true;
   }
 }
+
 
 export async function fetchCardData(id: string) {
   noStore();

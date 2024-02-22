@@ -97,6 +97,8 @@ export async function createPost(formData: FormData) {
     INSERT INTO sharingposts (creator_id, creation_date, company, interview_status, interview_type, title, content, likes, views, meet_able, meet_charge, available_time)
     VALUES (${creator_id}, ${creation_date}, ${company}, ${interview_status}, ${interview_type}, ${title}, ${content}, ${likes}, ${views}, ${meet_able}, ${meet_charge}, ${available_time})
   `;
+  // set viewstatus to unlimited
+  const setStatusLimited = await sql`UPDATE viewstatus SET status = 'unlimited' WHERE user_id = ${creator_id}`;
 
   revalidatePath('/posts');
   redirect('/posts');
@@ -165,11 +167,19 @@ export async function createUser(
     `;
     const insertedUserId = insertionRes.rows[0].id;
     console.log('Inserted user ID:', insertedUserId); 
+
     // insert init points
     const creation_time = new Date().toISOString();
     const initPoint = await sql`
     INSERT INTO pointrecords (user_id, points, action, timestamp)
     VALUES (${insertedUserId}, 10, ${"init"}, ${creation_time})
+    ON CONFLICT (id) DO NOTHING;
+  `;
+
+    // insert init viewstatus
+    const initViewStatus = await sql`
+    INSERT INTO viewstatus (user_id, status)
+    VALUES (${insertedUserId}, ${"new"})
     ON CONFLICT (id) DO NOTHING;
   `;
 
