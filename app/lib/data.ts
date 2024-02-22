@@ -58,6 +58,7 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchUnlimitedViewStatus(id: string) {
+  return true;
   noStore(); // Assuming this is a function call relevant to your setup.
   try {
     const result = await sql`
