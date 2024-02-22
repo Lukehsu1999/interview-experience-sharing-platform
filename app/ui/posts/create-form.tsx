@@ -156,6 +156,7 @@ export default function Form({ userId }: FormProps) {
                 onChange={handleContentChange}
                 className="w-full border border-gray-300 p-2 rounded-md placeholder:text-gray-500"
                 style={{ minHeight: '150px' }}
+                required
               ></textarea>
             </div>
           </div>
