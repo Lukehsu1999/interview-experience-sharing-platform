@@ -197,7 +197,7 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
       sharingposts.content ILIKE ${`%${query}%`} OR
       users.name ILIKE ${`%${query}%`} OR
       users.email ILIKE ${`%${query}%`}
-    ORDER BY sharingposts.creation_date DESC
+    ORDER BY views DESC
     LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
   
     `;

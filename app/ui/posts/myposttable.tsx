@@ -6,9 +6,11 @@ import { fetchUserPosts } from '@/app/lib/data';
 import { ViewPostButton } from '@/app/ui/posts/viewPostButton';
 
 export default async function InvoicesTable({
-  query
+  query,
+  unlimitedView
 }: {
   query: string;
+  unlimitedView: boolean;
 }) {
   const posts = await fetchUserPosts(query);
   return (
@@ -26,7 +28,7 @@ export default async function InvoicesTable({
                     <p className="text-sm text-gray-500">{post.company}</p>
                   </div>
                   <p className="text-sm text-gray-500">{post.title}</p>
-                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id}/>
+                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id} unlimitedView={true}/>
                 </div>
                 {/* <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -99,7 +101,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-3 pr-3">
                     <div className="flex justify-end gap-3">
-                    <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id}/>
+                    <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={post.creator_id} unlimitedView={true}/>
                     </div>
                   </td>
                 </tr>

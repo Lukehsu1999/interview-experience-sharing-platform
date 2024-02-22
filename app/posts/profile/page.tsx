@@ -1,4 +1,4 @@
-import { fetchUserIdByNameEmail, fetchPostsPages } from '@/app/lib/data';
+import { fetchUserIdByNameEmail, fetchPostsPages, fetchUnlimitedViewStatus } from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
 import { Card } from '@/app/ui/dashboard/cards';
 import { lusitana } from '@/app/ui/fonts';
@@ -32,7 +32,7 @@ export default async function Page({
     String(userName),
     String(userEmail),
   );
-
+  const unlimitedView = await fetchUnlimitedViewStatus(userId);
   // get query params
   const query = 'query='+userName;
   const currentPage = Number(searchParams?.page) || 1;
@@ -67,7 +67,7 @@ export default async function Page({
           key={query + currentPage}
           fallback={<InvoicesTableSkeleton />}
         >
-          <Table query={userId} />
+          <Table query={userId} unlimitedView={true}/>
         </Suspense>
       </div>
       <div className="mt-2 grid grid-cols-1">
