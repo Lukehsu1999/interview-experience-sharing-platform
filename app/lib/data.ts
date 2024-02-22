@@ -172,33 +172,66 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   console.log(query);
   try {
+    // const posts = await sql<PostsTable>`
+    // SELECT
+    //   sharingposts.id,
+    //   sharingposts.creator_id,
+    //   sharingposts.creation_date,
+    //   sharingposts.company,
+    //   sharingposts.interview_status,
+    //   sharingposts.interview_type,
+    //   sharingposts.title,
+    //   sharingposts.content,
+    //   users.name,
+    //   users.email,
+    //   (SELECT COUNT(*) FROM likes WHERE likes.post_id = sharingposts.id) AS likes,
+    //   (SELECT COUNT(*) FROM views WHERE views.post_id = sharingposts.id) AS views
+    // FROM sharingposts
+    // JOIN users ON sharingposts.creator_id = users.id
+    // WHERE
+    //   sharingposts.creation_date::text ILIKE ${`%${query}%`} OR
+    //   sharingposts.company ILIKE ${`%${query}%`} OR
+    //   sharingposts.interview_status ILIKE ${`%${query}%`} OR
+    //   sharingposts.interview_type ILIKE ${`%${query}%`} OR
+    //   sharingposts.title ILIKE ${`%${query}%`} OR
+    //   sharingposts.content ILIKE ${`%${query}%`} OR
+    //   users.name ILIKE ${`%${query}%`} OR
+    //   users.email ILIKE ${`%${query}%`}
+    // ORDER BY (views+likes) DESC
+    // LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    // `;
+
     const posts = await sql<PostsTable>`
-    SELECT
-      sharingposts.id,
-      sharingposts.creator_id,
-      sharingposts.creation_date,
-      sharingposts.company,
-      sharingposts.interview_status,
-      sharingposts.interview_type,
-      sharingposts.title,
-      sharingposts.content,
-      users.name,
-      users.email,
-      (SELECT COUNT(*) FROM likes WHERE likes.post_id = sharingposts.id) AS likes,
-      (SELECT COUNT(*) FROM views WHERE views.post_id = sharingposts.id) AS views
-    FROM sharingposts
-    JOIN users ON sharingposts.creator_id = users.id
-    WHERE
-      sharingposts.creation_date::text ILIKE ${`%${query}%`} OR
-      sharingposts.company ILIKE ${`%${query}%`} OR
-      sharingposts.interview_status ILIKE ${`%${query}%`} OR
-      sharingposts.interview_type ILIKE ${`%${query}%`} OR
-      sharingposts.title ILIKE ${`%${query}%`} OR
-      sharingposts.content ILIKE ${`%${query}%`} OR
-      users.name ILIKE ${`%${query}%`} OR
-      users.email ILIKE ${`%${query}%`}
-    ORDER BY views DESC
-    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+    WITH PostsWithCounts AS (
+      SELECT
+          sharingposts.id,
+          sharingposts.creator_id,
+          sharingposts.creation_date,
+          sharingposts.company,
+          sharingposts.interview_status,
+          sharingposts.interview_type,
+          sharingposts.title,
+          sharingposts.content,
+          users.name,
+          users.email,
+          (SELECT COUNT(*) FROM likes WHERE likes.post_id = sharingposts.id) AS likes,
+          (SELECT COUNT(*) FROM views WHERE views.post_id = sharingposts.id) AS views
+      FROM sharingposts
+      JOIN users ON sharingposts.creator_id = users.id
+      WHERE
+          sharingposts.creation_date::text ILIKE ${`%${query}%`} OR
+          sharingposts.company ILIKE ${`%${query}%`} OR
+          sharingposts.interview_status ILIKE ${`%${query}%`} OR
+          sharingposts.interview_type ILIKE ${`%${query}%`} OR
+          sharingposts.title ILIKE ${`%${query}%`} OR
+          sharingposts.content ILIKE ${`%${query}%`} OR
+          users.name ILIKE ${`%${query}%`} OR
+          users.email ILIKE ${`%${query}%`}
+  )
+  SELECT *
+  FROM PostsWithCounts
+  ORDER BY (likes + views) DESC, creation_date DESC
+  LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
   
     `;
     // for each posts, get the total number of likes and views
