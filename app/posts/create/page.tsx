@@ -31,11 +31,11 @@ export default async function Page() {
         ]}
       />
       {(!unlimitedView) &&
-      <div>
+      <div><strong>
         Please create a new post to help other students ❤️, building a supportive community🤝! <br></br>
         We greatly appreciate your time and effort, you will have unlimited view access 👀 after creating the post. <br></br>
         We value your contribution and please checkout the Announcements for rewards💰!
-      </div>
+      </strong></div>
 
       }
       <Form userId={userId}/>

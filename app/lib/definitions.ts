@@ -81,6 +81,12 @@ export type PointRecord = {
   timestamp: string;
 }
 
+export type ViewStatus = {
+  id: string;
+  user_id: string;
+  status: 'new' | 'limited' | 'unlimited';
+}
+
 // From Invoices Project
 export type Customer = {
   id: string;

@@ -218,17 +218,33 @@ async function seedPointRecords(client) {
   }
 }
 
+async function seedViewStatus(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS viewstatus (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        user_id UUID NOT NULL UNIQUE,
+        status VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "viewstatus" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding viewstatus:', error);
+    throw error;
+  }
+}
+
 
 async function main() {
   const client = await db.connect();
-  
-  await seedUsers(client);
-  await seedSharingPosts(client);
-  await seedLikes(client);
-  await seedViews(client);
-  await seedMeets(client);
-  await seedPointRecords(client);
-
+  //const seedviewres = await seedViewStatus(client);
 
   await client.end();
 }
