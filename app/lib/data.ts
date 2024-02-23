@@ -167,7 +167,7 @@ export async function fetchFilteredInvoices(
   }
 }
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 12;
 export async function fetchFilteredPosts(query: string, currentPage: number) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
