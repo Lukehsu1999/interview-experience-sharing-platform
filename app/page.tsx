@@ -13,7 +13,7 @@ export default function Page() {
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"
-            className="bg-highlightgreen-100 mr-5 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-miumee-color-400  mr-5 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
@@ -27,14 +27,14 @@ export default function Page() {
         </div>
       </div>
       <div className="gPap-4 mt-4 flex grow flex-col md:flex-row">
-        <div className="flex flex-col justify-start gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
+        <div className="flex flex-col justify-centerx gap-6 rounded-lg bg-gray-50 px-6 py-10 md:px-20"> {/*md:w-2/5*/ }
           <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             <strong>Welcome to Miumee</strong>
             <br></br>
-            Student Career-Development Sharing Platform<br></br>
-            <br></br>
+            {/* Student Career-Development Sharing Platform<br></br>
+            <br></br> */}
             <span className="font-bold text-miumee-color-400">
-              Come here to share your experiences in
+              Come here to find experiences in
             </span>
             <br></br>
             {/* Come here to share your experiences in <br></br> */}
@@ -59,7 +59,7 @@ export default function Page() {
           </p>
           <Link
             href="/login"
-            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-miumee-color-400 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
@@ -71,9 +71,10 @@ export default function Page() {
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
-        <div className="flex grid grid-cols-1 items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <Demoblock />
-        </div>
+        {/* <div className="flex grid grid-cols-1 items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+           <Demoblock /> 
+          
+        </div> */}
       </div>
     </main>
   );
