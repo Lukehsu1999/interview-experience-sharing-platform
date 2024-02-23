@@ -1,0 +1,26 @@
+Hello {seeker name} and {sharer name},
+
+I hope this message finds you well. We're delighted that you've chosen to use the “Invite to Meet” service on Miumee, and we're excited to help facilitate a meaningful connection between you both.
+
+{seeker name}, your interest in {sharer name}'s post titled "{post title}" has not gone unnoticed! To foster a deeper understanding and discussion about this topic, we're proposing a 20-minute meeting at a mutually convenient time.
+
+**Meeting Details**:
+
+- **Duration**: 20 minutes
+- **Tentative Schedule**: {available_time}
+- **Meeting Fee**: As our payment functionality is in development, Miumee is waiving the usual platform fee for this session. Instead, we kindly ask that the agreed-upon compensation {meet charge}be directly provided to {sharer name} by you, {seeker name}, following the meeting.
+
+{sharer name}, could you please confirm your availability during the proposed time or suggest an alternative that works better for you?
+
+{seeker name}, once we have {sharer name}'s confirmation, please confirm the meeting details.
+
+Thank you for being an active part of the Miumee community.
+
+Looking forward to your responses and to facilitating this exciting exchange!
+
+We are still building the meeting service, please kindly provide us with suggestions on how we can improve it.
+
+
+Warmest regards,
+
+Miumee
