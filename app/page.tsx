@@ -2,6 +2,7 @@ import MiumeeLogo from '@/app/ui/miumee-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
+import Demoblock from '@/app/ui/landingpage/demoblock';
 //maybe I will add session here
 
 export default function Page() {
@@ -12,13 +13,13 @@ export default function Page() {
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"
-            className="flex items-center gap-5 mr-5 self-start rounded-lg bg-highlightgreen-100 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-highlightgreen-100 mr-5 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
           <Link
             href="/register"
-            className="flex items-center gap-5 self-start rounded-lg bg-highlightgreen-100 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Sign up for free</span>{' '}
             <ArrowRightIcon className="w-5 md:w-6" />
@@ -58,105 +59,20 @@ export default function Page() {
           </p>
           <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-highlightgreen-100 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
           <Link
             href="/register"
-            className="flex items-center gap-5 self-start rounded-lg bg-highlightgreen-100 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Sign up for free</span>{' '}
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
         <div className="flex grid grid-cols-1 items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
-            <strong>Help people by making a post and win $150!</strong>
-          </p>
-          <Image
-            src="/Contest-Rules-2.png"
-            width={1000}
-            height={760}
-            className="mt-4 hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/Contest-Rules-2.png"
-            width={560}
-            height={430}
-            className="mt-4 block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
-            <strong>Search for Interview Experience</strong>
-          </p>
-          <Image
-            src="/demo_all_posts.png"
-            width={1000}
-            height={760}
-            className="mt-4 hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/demo_all_posts.png"
-            width={560}
-            height={430}
-            className="mt-4 block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
-            <strong>Send Invitation for a quick Call</strong>
-          </p>
-          <Image
-            src="/demo_view_post.png"
-            width={1000}
-            height={760}
-            className="mb-6 mt-4 hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/demo_view_post.png"
-            width={560}
-            height={430}
-            className="mb-6 mt-4 block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
-            <strong>Share your interview experience</strong>
-          </p>
-          <Image
-            src="/demo_create_post.png"
-            width={1000}
-            height={760}
-            className="mb-6 mt-4 hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/demo_create_post.png"
-            width={560}
-            height={430}
-            className="mb-6 mt-4 block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
-          <p className={`text-xl text-white md:text-3xl md:leading-normal`}>
-            <strong>Track your progress and earn points</strong>
-          </p>
-          <Image
-            src="/demo_profile.png"
-            width={1000}
-            height={760}
-            className="mb-6 mt-4 hidden md:block"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <Image
-            src="/demo_profile.png"
-            width={560}
-            height={430}
-            className="mb-6 mt-4 block md:hidden"
-            alt="Screenshots of the dashboard project showing mobile version"
-          />
+          <Demoblock />
         </div>
       </div>
     </main>
