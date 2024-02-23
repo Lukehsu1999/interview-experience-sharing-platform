@@ -10,7 +10,8 @@
     "resetPwd": "node -r dotenv/config ./scripts/resetPwd.js",
     "pendingMeets": "node -r dotenv/config ./scripts/getPendingMeets.js",
     "updateMeets": "node -r dotenv/config ./scripts/setMeetsInvited.js",
-    "ranking": "node -r dotenv/config ./scripts/getUserPointRanking.js"
+    "ranking": "node -r dotenv/config ./scripts/getUserPointRanking.js",
+    "email": "node -r dotenv/config ./scripts/getAllEmails.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

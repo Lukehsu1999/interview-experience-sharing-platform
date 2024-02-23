@@ -7,7 +7,7 @@ async function getPendingMeetsEmailList(client) {
   try {
     // Get the pending meets
     const pendingmeets = await client.query(
-      "SELECT * FROM meets WHERE meet_status='pending';"
+      "SELECT meets.*, sharingposts.title, sharingposts.available_time FROM meets JOIN sharingposts ON meets.post_id = sharingposts.id WHERE meets.meet_status = 'pending';"
     );
     // Write emails informing the seeker_name
     console.log("Pending meets: ", pendingmeets.rows, " Remember to setMeetsInvited!");

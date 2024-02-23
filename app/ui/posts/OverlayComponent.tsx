@@ -1,12 +1,9 @@
-// OverlayComponent.tsx
+// components/Overlay.tsx
 import React, { useState } from 'react';
 
-interface OverlayProps {
-  isVisible: boolean;
-  onClose: () => void;
-}
+const Overlay = () => {
+  const [isVisible, setIsVisible] = useState(true);
 
-const OverlayComponent: React.FC<OverlayProps> = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
@@ -29,10 +26,10 @@ const OverlayComponent: React.FC<OverlayProps> = ({ isVisible, onClose }) => {
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
       }}>
         <p>Hello</p>
-        <button onClick={onClose}>Close</button>
+        <button onClick={() => setIsVisible(false)}>Close</button>
       </div>
     </div>
   );
 };
 
-export default OverlayComponent;
+export default Overlay;
