@@ -28,7 +28,9 @@ const config: Config = {
           500: '#03C0D5'
         },
         'highlightgreen':{
-          100: '#D3FB52'
+          100: '#D3FB52',
+          200: '#AEE22D',
+          300: '#9ECB1C'
         }
       },
     },

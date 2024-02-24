@@ -16,13 +16,13 @@ export default function Page() {
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"
-            className="mr-5  flex items-center gap-5 self-start rounded-lg bg-miumee-color-400 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="mr-5  flex items-center gap-5 self-start rounded-lg bg-highlightgreen-200 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-highlightgreen-300 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
           <Link
             href="/register"
-            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-highlightgreen-200 md:text-base"
           >
             <span>Sign up for free</span>{' '}
             <ArrowRightIcon className="w-5 md:w-6" />
@@ -64,9 +64,16 @@ export default function Page() {
           </p>
           <Link
             href="/register"
-            className="max-w-xs mx-auto bg-highlightgreen-100 flex items-center gap-5 rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="max-w-xs mx-auto bg-highlightgreen-100 flex items-center gap-5 rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-highlightgreen-200 md:text-base"
           >
             <span>Sign up for free</span>{' '}
+            <ArrowRightIcon className="w-5 md:w-6" />
+          </Link>
+          <Link
+            href="/login"
+            className="max-w-xs mx-auto bg-highlightgreen-100 flex items-center gap-5 rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-highlightgreen-200 md:text-base"
+          >
+            <span>login</span>{' '}
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
