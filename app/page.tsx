@@ -3,6 +3,9 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
 import Demoblock from '@/app/ui/landingpage/demoblock';
+import PlatformCardWrapper from './ui/posts/platformStatsCards';
+import { CardsSkeleton } from '@/app/ui/skeletons';
+import { Suspense } from 'react';
 //maybe I will add session here
 
 export default function Page() {
@@ -13,7 +16,7 @@ export default function Page() {
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"
-            className="bg-miumee-color-400  mr-5 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="mr-5  flex items-center gap-5 self-start rounded-lg bg-miumee-color-400 px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
@@ -26,55 +29,53 @@ export default function Page() {
           </Link>
         </div>
       </div>
-      <div className="gPap-4 mt-4 flex grow flex-col md:flex-row">
-        <div className="flex flex-col justify-centerx gap-6 rounded-lg bg-gray-50 px-6 py-10 md:px-20"> {/*md:w-2/5*/ }
-          <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Miumee</strong>
-            <br></br>
+      <div className="gPap-4 mt-4 flex grow flex-col"> {/*md:flex-row*/}
+        <div className="flex flex-col item-center justify-center gap-6 rounded-lg bg-miume-color-400 px-6 py-10 md:px-20"> {/*md:w-2/5*/}
+          {' '}
+          {/*md:w-2/5*/}
+          <p className={`text-xl text-gray-800 md:text-4xl md:leading-normal text-center`}>
             {/* Student Career-Development Sharing Platform<br></br>
             <br></br> */}
-            <span className="font-bold text-miumee-color-400">
+            <span className="font-bold text-miumee-color-500">
               Come here to find experiences in
             </span>
             <br></br>
             {/* Come here to share your experiences in <br></br> */}
-            <span className="font-bold text-miumee-color-500">
-              🗣️ Interview,
+            <span className="font-bold text-white md:text-5xl">
+              🗣️ Interview
             </span>
-            <br></br>
-            <span className="font-bold text-miumee-color-500">💼 Work,</span>
-            <br></br>
-            <span className="font-bold text-miumee-color-500">
-              🏫 School Admission,
+            <span className="md:ml-5"></span>
+            
+            <span className="font-bold text-white md:text-5xl">💼 Work  </span>
+            <span className="md:ml-5"></span>
+            
+            <span className="font-bold text-white md:text-5xl">
+              🏫 School Admission  
             </span>
-            <br></br>
-            <span className="font-bold text-miumee-color-500">👩‍🔬 Research</span>
-            <br></br>
-            <span className="font-bold text-miumee-color-400">
+            <span className="md:ml-5"></span>
+            
+            <span className="font-bold text-white md:text-5xl">👩‍🔬 Research</span>
+            {/* <br></br> */}
+            {/* <span className="font-bold text-miumee-color-500">
               Help People and Earn Money 💵!
-            </span>
-            <br></br>
+            </span> */}
             {/* We aim to build a sustainable and supportive network. <br></br>
             Providing experience seekers accurate and high quality contents.<br></br> */}
           </p>
           <Link
-            href="/login"
-            className="bg-miumee-color-400 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
-          >
-            <span>Login</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-          <Link
             href="/register"
-            className="bg-highlightgreen-100 flex items-center gap-5 self-start rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
+            className="max-w-xs mx-auto bg-highlightgreen-100 flex items-center gap-5 rounded-lg px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-miumee-color-400 md:text-base"
           >
             <span>Sign up for free</span>{' '}
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
-        {/* <div className="flex grid grid-cols-1 items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-           <Demoblock /> 
-          
-        </div> */}
+        <div className="flex grid gap-6 items-start justify-center p-6 sm:grid-cols-1 md:px-12 sm:px-6 lg:grid-cols-3"> {/*md:w-3/5*/}
+          {/* <Demoblock />  */}
+          <Suspense fallback={<CardsSkeleton />}>
+            <PlatformCardWrapper />
+          </Suspense>
+        </div>
       </div>
     </main>
   );

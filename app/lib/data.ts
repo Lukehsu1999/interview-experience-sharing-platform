@@ -130,6 +130,32 @@ export async function fetchCardData(id: string) {
   }
 }
 
+export async function fetchPlatformStats(){
+  noStore();
+  try {
+    const totalPosts = await sql`SELECT COUNT(*) FROM sharingposts`;
+    const totalUsers = await sql`SELECT COUNT(*) FROM users`;
+    //const totalLikes = await sql`SELECT COUNT(*) FROM likes`;
+    //const totalViews = await sql`SELECT COUNT(*) FROM views`;
+    const totalMeets = await sql`SELECT COUNT(*) FROM meets`;
+      //const totalPoints = await sql`SELECT SUM(points) AS total_points FROM pointrecords`;
+
+    const numberOfPosts= Number(totalPosts.rows[0].count);
+    const numberOfUsers= Number(totalUsers.rows[0].count);
+    const numberOfMeets = Number(totalMeets.rows[0].count);
+
+    return {
+      numberOfPosts,
+      numberOfUsers,
+      numberOfMeets,
+    };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch platform stats.');
+  }
+
+}
+
 // const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
