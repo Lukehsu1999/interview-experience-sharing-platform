@@ -1,4 +1,8 @@
-import { fetchUserIdByNameEmail, fetchPostsPages, fetchUnlimitedViewStatus } from '@/app/lib/data';
+import {
+  fetchUserIdByNameEmail,
+  fetchPostsPages,
+  fetchUnlimitedViewStatus,
+} from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
 import { Card } from '@/app/ui/dashboard/cards';
 import { lusitana } from '@/app/ui/fonts';
@@ -12,6 +16,7 @@ import {
 } from '@/app/ui/skeletons';
 import CardWrapper from '@/app/ui/dashboard/cards';
 import Table from '@/app/ui/posts/myposttable';
+import ResetPassword from '@/app/ui/posts/resetPassword';
 
 export default async function Page({
   searchParams,
@@ -34,44 +39,61 @@ export default async function Page({
   );
   const unlimitedView = await fetchUnlimitedViewStatus(userId);
   // get query params
-  const query = 'query='+userName;
+  const query = 'query=' + userName;
   const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchPostsPages(query);
+  const sectionClassname = "mb-8 p-4 rounded-lg shadow-md bg-gray-50";
 
   return (
     <main>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Dashboard
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Suspense fallback={<CardsSkeleton />}>
-          <CardWrapper userId={userId} />
-        </Suspense>
-      </div>
-      <div
-          className="flex h-15 items-end space-x-1"
+      <div className={sectionClassname}>
+        <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+          Dashboard
+        </h1>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Suspense fallback={<CardsSkeleton />}>
+            <CardWrapper userId={userId} />
+          </Suspense>
+        </div>
+        <div
+          className="h-15 flex items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
         >
           {
             <>
-              <p className="text-sm text-blue-500">{"1 view = 1 point; 1 like = 5 points. In the future we hope to reward content creators for the sustainability of the website, for now, check out the Announcements page for the awards we can afford for now"}</p>
+              <p className="text-sm text-blue-500">
+                {
+                  '1 view = 1 point; 1 like = 5 points. In the future we hope to reward content creators for the sustainability of the website, for now, check out the Announcements page for the awards we can afford for now'
+                }
+              </p>
             </>
           }
         </div>
-      <h1 className={`${lusitana.className} mt-4 mb-4 text-xl md:text-2xl`}>
-        My Posts
-      </h1>
-      <div className="grid grid-cols-1 gap-6">
-        <Suspense
-          key={query + currentPage}
-          fallback={<InvoicesTableSkeleton />}
-        >
-          <Table query={userId} unlimitedView={true}/>
-        </Suspense>
       </div>
-      <div className="mt-2 grid grid-cols-1">
-        <CreatePost />
+      <div className={sectionClassname}>
+        <h1 className={`${lusitana.className} mb-4 mt-4 text-xl md:text-2xl`}>
+          My Posts
+        </h1>
+        <div className="grid grid-cols-1 gap-6">
+          <Suspense
+            key={query + currentPage}
+            fallback={<InvoicesTableSkeleton />}
+          >
+            <Table query={userId} unlimitedView={true} />
+          </Suspense>
+        </div>
+        <div className="mt-2 grid grid-cols-1">
+          <CreatePost />
+        </div>
+      </div>
+      <div className={sectionClassname}>
+        <h1 className={`${lusitana.className} mb-4 mt-4 text-xl md:text-2xl`}>
+          Reset Password
+        </h1>
+        <div className="grid grid-cols-1 gap-6">
+          <ResetPassword userId={userId} />
+        </div>
       </div>
     </main>
   );

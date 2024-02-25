@@ -195,6 +195,25 @@ export async function createUser(
     }
   }
 }
+export async function resetPassword(
+  userId: string,
+  newPassword:string,
+){
+  try {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const updatePassword = await sql`
+      UPDATE users
+      SET password = ${hashedPassword}
+      WHERE id = ${userId};
+    `;
+    console.log(`Update password`);
+    return 'Success! Password updated';
+  } catch (error: any) {
+    console.error('Update password error');
+    return 'Update password error';
+  }
+
+}
 
 export async function addLike(
   post_id: string,
