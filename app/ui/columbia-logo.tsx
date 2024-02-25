@@ -6,7 +6,7 @@ export default function ColumbiaLogo() {
     <div
       className={`flex flex-row items-center leading-none text-white`}
     >
-      <Image src="/ColumbiaLogo.png" alt="Columbia" width={250} height={44} />
+      <Image src="/ColumbiaLogo4.png" alt="Columbia" width={300} height={44} />
     </div>
   );
 }
