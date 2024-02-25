@@ -257,7 +257,7 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
   )
   SELECT *
   FROM PostsWithCounts
-  ORDER BY (likes + views) DESC, creation_date DESC
+  ORDER BY creation_date DESC
   LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
   
     `;
