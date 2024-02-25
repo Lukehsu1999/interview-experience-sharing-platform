@@ -3,6 +3,7 @@ import {
     ClockIcon,
     UserGroupIcon,
     InboxIcon,
+    EyeIcon,
     ChatBubbleLeftRightIcon,
     NewspaperIcon
   } from '@heroicons/react/24/outline';
@@ -13,21 +14,23 @@ import {
     posts: NewspaperIcon,
     users: UserGroupIcon,
     meets: ChatBubbleLeftRightIcon,
+    views: EyeIcon,
   };
   
   export default async function PlatformCardWrapper() {
     const {
       numberOfPosts,
       numberOfUsers,
+      numberOfViews,
       numberOfMeets
     } = await fetchPlatformStats();
     return (
       <>
         {/* NOTE: comment in this code when you get to this point in the course */}
-  
-        <Card title="Total Posts" value={numberOfPosts} type="posts" />
         <Card title="Total Users" value={numberOfUsers} type="users" />
-        <Card title="Total Meetups" value={numberOfMeets} type="meets" />
+        <Card title="Total Posts" value={numberOfPosts} type="posts" />
+        <Card title="Total Unique Views" value={numberOfViews} type="views" />
+        <Card title="Total Meetups between Students" value={numberOfMeets} type="meets" />
       </>
     );
   }
@@ -39,7 +42,7 @@ import {
   }: {
     title: string;
     value: number | string;
-    type: 'posts' | 'users' | 'meets';
+    type: 'posts' | 'users' | 'meets'| 'views';
   }) {
     const Icon = iconMap[type];
   

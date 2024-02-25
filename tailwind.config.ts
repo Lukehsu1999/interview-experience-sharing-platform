@@ -31,6 +31,9 @@ const config: Config = {
           100: '#D3FB52',
           200: '#AEE22D',
           300: '#9ECB1C'
+        },
+        'columbia-blue':{
+          400: '#123C72'
         }
       },
     },

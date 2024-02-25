@@ -77,7 +77,7 @@ export default function LoginForm() {
           {errorMessage && (
             <>
               <ExclamationCircleIcon className="w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage + " Forget your password? Send to th2881@columbia.edu and we will send you a temporary password"}</p>
+              <p className="text-sm text-red-500">{errorMessage + " Forget your password? Send to th2881@columbia.edu and we will send you a temporary password, please reset it in your profile"}</p>
             </>
           )}
         </div>

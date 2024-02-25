@@ -1,4 +1,6 @@
 import MiumeeLogo from '@/app/ui/miumee-logo';
+import ColumbiaLogo from './ui/columbia-logo';
+import BarnardLogo from './ui/barnard-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,8 +13,10 @@ import { Suspense } from 'react';
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col bg-miumee-color-400 p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-miumee-color-500 p-4 md:h-52">
+      <div className="flex h-20 shrink-0 items-end rounded-lg bg-columbia-blue-400 p-4 md:h-52">
         <MiumeeLogo />
+        <ColumbiaLogo />
+        <BarnardLogo />
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"
@@ -77,7 +81,7 @@ export default function Page() {
             <ArrowRightIcon className="w-5 md:w-6" />
           </Link>
         </div>
-        <div className="flex grid gap-6 items-start justify-center p-6 sm:grid-cols-1 md:px-12 sm:px-6 lg:grid-cols-3"> {/*md:w-3/5*/}
+        <div className="flex grid gap-6 items-start justify-center p-6 sm:grid-cols-1 md:px-12 sm:px-6 lg:grid-cols-4"> {/*md:w-3/5*/}
           {/* <Demoblock />  */}
           <Suspense fallback={<CardsSkeleton />}>
             <PlatformCardWrapper />

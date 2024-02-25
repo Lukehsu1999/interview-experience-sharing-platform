@@ -40,11 +40,6 @@ export default async function Page({
         Share your experience in 🗣️ interview, 💼 work, 🏫 research, and 👩‍🔬school admission<br></br>
         All posts are anonymous now, but you can view your posts in Profile & Points</h1>
       </div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Suspense fallback={<CardsSkeleton />}>
-          <PlatformCardWrapper />
-        </Suspense>
-      </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search posts by Company, Title, Status, Type..." />
         <CreatePost />
@@ -54,6 +49,11 @@ export default async function Page({
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Suspense fallback={<CardsSkeleton />}>
+          <PlatformCardWrapper />
+        </Suspense>
       </div>
     </div>
   );
