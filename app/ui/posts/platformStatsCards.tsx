@@ -30,7 +30,7 @@ import {
         <Card title="Total Users" value={numberOfUsers} type="users" />
         <Card title="Total Posts" value={numberOfPosts} type="posts" />
         <Card title="Total Unique Views" value={numberOfViews} type="views" />
-        <Card title="Total Meetups between Students" value={numberOfMeets} type="meets" />
+        <Card title="Meetups between Students" value={numberOfMeets} type="meets" />
       </>
     );
   }
