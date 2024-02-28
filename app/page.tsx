@@ -13,10 +13,10 @@ import { Suspense } from 'react';
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col bg-miumee-color-400 p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-columbia-blue-400 p-4 md:h-52">
+      <div className="flex h-20 shrink-0 items-end rounded-lg bg-miumee-color-500 p-4 md:h-52">
         <MiumeeLogo />
-        <ColumbiaLogo />
-        <BarnardLogo />
+        {/* <ColumbiaLogo />
+        <BarnardLogo /> */}
         <div className="hidden md:block md:flex md:flex-grow md:items-end md:justify-end">
           <Link
             href="/login"

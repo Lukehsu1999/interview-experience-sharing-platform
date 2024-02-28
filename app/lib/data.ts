@@ -261,7 +261,6 @@ export async function fetchFilteredPosts(query: string, currentPage: number) {
   FROM PostsWithCounts
   ORDER BY creation_date DESC, views DESC, likes DESC
   LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset};
-  
     `;
     // for each posts, get the total number of likes and views
     // for (let i = 0; i < posts.rows.length; i++) {
