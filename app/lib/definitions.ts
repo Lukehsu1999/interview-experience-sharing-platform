@@ -25,6 +25,14 @@ export type SharingPost = {
   available_time: string;
 };
 
+export type Comment = {
+  id: string;
+  post_id: string;  
+  creator_id: string;
+  timestamp: string;
+  content: string;
+}
+
 export type PostsTable = {
   id: string;
   creator_id: string;

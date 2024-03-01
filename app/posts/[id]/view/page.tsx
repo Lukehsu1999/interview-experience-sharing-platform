@@ -1,4 +1,5 @@
 import Display from '@/app/ui/posts/post-display';
+import { CommentSection } from '@/app/ui/posts/commentSection';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchUserIdByNameEmail, fetchPostById, fetchLikeStatus, fetchMeetStatus } from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
@@ -51,6 +52,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <Display post={post} userId={userId} userName={String(userName)} userEmail={String(userEmail)} likeStatus={likeStatus} invitedStatus={meetStatus}/>
+      <CommentSection post_id={id} />
     </main>
   );
 }
