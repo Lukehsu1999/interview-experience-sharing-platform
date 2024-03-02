@@ -380,3 +380,23 @@ export async function addMeet(
     return 'Database Insertion Meet error';
   }
 }
+
+export async function createComment(
+  post_id: string,
+  creator_id: string,
+  content: string,
+) {
+  try {
+    const timestamp = new Date().toISOString();
+    const insertComment = await sql`
+      INSERT INTO comments (post_id, creator_id, timestamp, content)
+      VALUES (${post_id}, ${creator_id}, ${timestamp}, ${content});
+    `;
+
+    console.log(`Insert comments`);
+    return 'Success! Comment added';
+  } catch (error: any) {
+    console.error('Database Insertion Comment error:', error);
+    return 'Database Insertion Comment error';
+  }
+}

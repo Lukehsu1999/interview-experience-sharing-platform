@@ -8,6 +8,7 @@ import {
   User,
   Revenue,
   PostsTable,
+  Comment
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -439,6 +440,26 @@ export async function fetchPostById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch post by Id.');
+  }
+}
+
+export async function fetchCommentsByPostId(id: string) {
+  noStore();
+  try {
+    const data = await sql`
+    SELECT
+      comments.id,
+      comments.post_id,
+      comments.creator_id,
+      comments.timestamp,
+      comments.content
+    FROM comments
+    WHERE comments.post_id = ${id};
+    `;
+    return data.rows as Comment[];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch comments by postId.');
   }
 }
 
