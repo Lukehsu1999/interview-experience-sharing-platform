@@ -4,6 +4,17 @@ import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredPosts } from '@/app/lib/data';
 
+import React from 'react';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from '@mui/material';
+
 export default async function InvoicesTable({
   query,
   currentPage,
@@ -18,102 +29,130 @@ export default async function InvoicesTable({
   const posts = await fetchFilteredPosts(query, currentPage);
 
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <div className="md:hidden">
-            {posts?.map((post) => (
-              <div
-                key={post.id}
-                className="mb-2 w-full rounded-md bg-white p-4"
+    <div className="mt-6 overflow-x-auto">
+      <TableContainer
+        component={Paper}
+        className="rounded-lg bg-gray-50 p-2 md:pt-0"
+      >
+        <Table aria-label="simple table" size="small">
+          <TableHead>
+            <TableRow sx={{ height: '56px' }}>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
               >
-                <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <p className="text-sm text-gray-500">{post.company}</p>
-                  </div>
-                  <p className="text-sm text-gray-500">{post.title}</p>
-                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id} unlimitedView={unlimitedView}/>
-                </div>
-                {/* <div className="flex w-full items-center justify-between pt-4">
-                  <div>
-                    <p className="text-xl font-medium">{post.title}</p>
-                    <p>{formatDateToLocal(post.creation_date)}</p>
-                  </div>
-                  <div className="flex justify-end gap-2">
-                  <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id}/>
-                  </div>
-                </div> */}
-              </div>
-            ))}
-          </div>
-          <table className="hidden min-w-full text-gray-900 md:table">
-            <thead className="rounded-lg text-left text-sm font-normal">
-              <tr>
-                {/* <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Creator
-                </th> */}
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Company
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Title
-                </th>
-                {/* <th scope="col" className="px-3 py-5 font-medium">
-                  Date
-                </th> */}
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Status
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Type
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Unique Views
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Likes
-                </th>
-                <th scope="col" className="relative py-3 pl-3 pr-3">
-                  <span className="sr-only">Edit</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              {posts?.map((post) => (
-                <tr
-                  key={post.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                Company
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Title
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Status
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Type
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Unique Views
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Likes
+              </TableCell>
+              <TableCell
+                sx={{
+                  fontWeight: 'bold',
+                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                }}
+              >
+                Edit
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {posts?.map((post) => (
+              <TableRow key={post.id}>
+                <TableCell
+                  style={{
+                    maxWidth: 160,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
                 >
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {post.company}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">{post.title}</td>
-                  {/* <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(post.creation_date)}
-                  </td> */}
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <p>{post.interview_status}</p>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <p>{post.interview_type}</p>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <p>{post.views}</p>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <p>{post.likes}</p>
-                  </td>
-                  <td className="whitespace-nowrap py-3 pl-3 pr-3">
-                    <div className="flex justify-end gap-3">
-                      <ViewPostButton post_id={post.id} creator_id={post.creator_id} viewer_id={viewer_id} unlimitedView={unlimitedView}/>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                  {post.company}
+                </TableCell>
+                <TableCell
+                  style={{
+                    maxWidth: 160,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {post.title}
+                </TableCell>
+                <TableCell
+                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                >
+                  {post.interview_status}
+                </TableCell>
+                <TableCell
+                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                >
+                  {post.interview_type}
+                </TableCell>
+                <TableCell
+                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                >
+                  {post.views}
+                </TableCell>
+                <TableCell
+                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                >
+                  {post.likes}
+                </TableCell>
+                <TableCell
+                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                >
+                  <ViewPostButton
+                    post_id={post.id}
+                    creator_id={post.creator_id}
+                    viewer_id={viewer_id}
+                    unlimitedView={unlimitedView}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
