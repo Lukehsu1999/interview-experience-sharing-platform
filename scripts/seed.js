@@ -241,10 +241,36 @@ async function seedViewStatus(client) {
   }
 }
 
+async function seedComments(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS comments (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        post_id UUID NOT NULL,
+        creator_id UUID NOT NULL,
+        timestamp DATE NOT NULL,
+        content TEXT NOT NULL
+      );
+    `;
+
+    console.log(`Created "comments" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding comments:', error);
+    throw error;
+  }
+}
+
 
 async function main() {
   const client = await db.connect();
   //const seedviewres = await seedViewStatus(client);
+  //const seedCommentsres = await seedComments(client);
 
   await client.end();
 }
