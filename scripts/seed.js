@@ -270,7 +270,7 @@ async function seedComments(client) {
 async function main() {
   const client = await db.connect();
   //const seedviewres = await seedViewStatus(client);
-  const seedCommentsres = await seedComments(client);
+  //const seedCommentsres = await seedComments(client);
 
   await client.end();
 }
