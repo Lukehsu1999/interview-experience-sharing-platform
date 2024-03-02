@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         ]}
       />
       <Display post={post} userId={userId} userName={String(userName)} userEmail={String(userEmail)} likeStatus={likeStatus} invitedStatus={meetStatus}/>
-      <CommentSection post_id={id} />
+      <CommentSection post_id={id} comments={[]}/>
     </main>
   );
 }
