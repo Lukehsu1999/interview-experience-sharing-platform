@@ -15,6 +15,18 @@ export function CommentSection({
   user_id: string;
 }) {
   const [newComment, setNewComment] = useState('');
+   // Add a useEffect to clear the textarea content after the state is updated
+   useEffect(() => {
+    // Check if the newComment state is empty
+    if (!newComment && textareaRef.current) {
+      // Clear the textarea content
+      textareaRef.current.value = '';
+      // Adjust the textarea height (if needed)
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [newComment]);
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     if (textareaRef.current) {
@@ -22,6 +34,7 @@ export function CommentSection({
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, [newComment]);
+
   const handleContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {

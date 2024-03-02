@@ -394,6 +394,8 @@ export async function createComment(
     `;
 
     console.log(`Insert comments`);
+    revalidatePath(`/posts/${post_id}/view`);
+    redirect(`/posts/${post_id}/view`);
     return 'Success! Comment added';
   } catch (error: any) {
     console.error('Database Insertion Comment error:', error);
