@@ -17,6 +17,29 @@ export default async function InvoicesTable({
 }) {
   const posts = await fetchFilteredPosts(query, currentPage);
 
+  const statusColors = {
+    'Full Time': 'bg-miumeeblue-500',
+    'Part Time': 'bg-highlightgreen-300',
+    Internship: 'bg-miumeeblue-400',
+    'Phone interview': 'bg-miumee-color-500',
+    'Online Assessment': 'bg-columbia-blue-400',
+    'First Round': 'bg-highlightgreen-200',
+    'Second Round': 'bg-highlightgreen-300',
+    'Third Round': 'bg-miumee-color-600',
+    'Final Round': 'bg-columbia-blue-400',
+    Others: 'bg-gray-400',
+  };
+
+  const typeColors = {
+    'School Admission': 'bg-miumeeblue-500',
+    Research: 'bg-highlightgreen-300',
+    Work: 'bg-miumeeblue-400',
+    'Technical Interview': 'bg-miumee-color-500',
+    'Behavioral Interview': 'bg-columbia-blue-400',
+    'Case Interview': 'bg-highlightgreen-200',
+    Others: 'bg-gray-400',
+  };
+
   return (
     <div className="mt-6">
       {posts?.map((post) => (
@@ -40,17 +63,21 @@ export default async function InvoicesTable({
               {/* Aligns the content to the bottom */}
               <div className="flex gap-2">
                 <div
-                  className={`rounded-full bg-miumeeblue-500 px-2 py-1 text-xs font-medium text-white`}
+                  className={`rounded-full px-2 py-1 text-xs font-medium text-white ${
+                    statusColors[post.interview_status] || 'bg-gray-400'
+                  }`}
                 >
                   {post.interview_status}
                 </div>
                 <div
-                  className={`rounded-full bg-miumee-color-500 px-2 py-1 text-xs font-medium text-white`}
+                  className={`rounded-full px-2 py-1 text-xs font-medium text-white ${
+                    typeColors[post.interview_type] || 'bg-gray-400'
+                  }`}
                 >
                   {post.interview_type}
                 </div>
               </div>
-              <div className="flex items-center space-x-3 p-2 text-xs mt-2">
+              <div className="mt-2 flex items-center space-x-3 p-2 text-xs">
                 {' '}
                 <div className="flex items-center">
                   <HeartIcon className="h-5 w-5 text-miumee-color-500" />{' '}

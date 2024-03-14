@@ -50,7 +50,8 @@ export function PostTitle({
         component="div"
         style={{ fontSize: '0.75em' }}
       >
-        {name} · {company} · {new Date(creation_date).toLocaleDateString()}
+        {/* {name} · {company} · {new Date(creation_date).toLocaleDateString()} */}
+        @{company} · {new Date(creation_date).toLocaleDateString()}
       </Typography>
       <Typography
         gutterBottom
