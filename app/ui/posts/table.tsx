@@ -1,19 +1,8 @@
-import Image from 'next/image';
-import { ViewPostButton } from '@/app/ui/posts/viewPostButton';
-import InvoiceStatus from '@/app/ui/invoices/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { fetchFilteredPosts } from '@/app/lib/data';
-
 import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@mui/material';
+import { Card, CardContent, Typography, Chip } from '@mui/material';
+import { fetchFilteredPosts } from '@/app/lib/data';
+import { PostTitle } from './PostTitle';
+import { HeartIcon, EyeIcon } from '@heroicons/react/24/outline';
 
 export default async function InvoicesTable({
   query,
@@ -28,131 +17,96 @@ export default async function InvoicesTable({
 }) {
   const posts = await fetchFilteredPosts(query, currentPage);
 
+  const statusColors = {
+    'Full Time': 'bg-miumeeblue-500',
+    'Part Time': 'bg-highlightgreen-300',
+    Internship: 'bg-miumeeblue-400',
+    'Phone interview': 'bg-miumee-color-500',
+    'Online Assessment': 'bg-columbia-blue-400',
+    'First Round': 'bg-highlightgreen-200',
+    'Second Round': 'bg-highlightgreen-300',
+    'Third Round': 'bg-miumee-color-600',
+    'Final Round': 'bg-columbia-blue-400',
+    Others: 'bg-gray-400',
+  };
+
+  const typeColors = {
+    'School Admission': 'bg-miumeeblue-500',
+    Research: 'bg-highlightgreen-300',
+    Work: 'bg-miumeeblue-400',
+    'Technical Interview': 'bg-miumee-color-500',
+    'Behavioral Interview': 'bg-columbia-blue-400',
+    'Case Interview': 'bg-highlightgreen-200',
+    Others: 'bg-gray-400',
+  };
+
   return (
-    <div className="mt-6 overflow-x-auto">
-      <TableContainer
-        component={Paper}
-        className="rounded-lg bg-gray-50 p-2 md:pt-0"
-      >
-        <Table aria-label="simple table" size="small">
-          <TableHead>
-            <TableRow sx={{ height: '56px' }}>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Company
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Title
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Status
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Type
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Unique Views
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Likes
-              </TableCell>
-              <TableCell
-                sx={{
-                  fontWeight: 'bold',
-                  borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                }}
-              >
-                Edit
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {posts?.map((post) => (
-              <TableRow key={post.id}>
-                <TableCell
-                  style={{
-                    maxWidth: 160,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {post.company}
-                </TableCell>
-                <TableCell
-                  style={{
-                    maxWidth: 160,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {post.title}
-                </TableCell>
-                <TableCell
-                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+    <div className="mt-6">
+      {posts?.map((post) => (
+        <Card key={post.id} className="mb-4">
+          <CardContent>
+            <PostTitle
+              post_id={post.id}
+              creator_id={post.creator_id}
+              title={post.title}
+              company={post.company}
+              name={post.name}
+              creation_date={post.creation_date}
+              unlimitedView={unlimitedView}
+              viewer_id={viewer_id}
+            />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {post.content.substring(0, 500)}
+            </Typography>
+            <div className="flex items-end justify-between">
+              {' '}
+              {/* Aligns the content to the bottom */}
+              <div className="flex gap-2">
+                <div
+                  className={`rounded-full px-2 py-1 text-xs font-medium text-white ${
+                    statusColors[post.interview_status] || 'bg-gray-400'
+                  }`}
                 >
                   {post.interview_status}
-                </TableCell>
-                <TableCell
-                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
+                </div>
+                <div
+                  className={`rounded-full px-2 py-1 text-xs font-medium text-white ${
+                    typeColors[post.interview_type] || 'bg-gray-400'
+                  }`}
                 >
                   {post.interview_type}
-                </TableCell>
-                <TableCell
-                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
-                >
-                  {post.views}
-                </TableCell>
-                <TableCell
-                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
-                >
-                  {post.likes}
-                </TableCell>
-                <TableCell
-                  sx={{ borderBottom: '1px solid rgba(224, 224, 224, 0.5)' }}
-                >
-                  <ViewPostButton
-                    post_id={post.id}
-                    creator_id={post.creator_id}
-                    viewer_id={viewer_id}
-                    unlimitedView={unlimitedView}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                </div>
+              </div>
+              <div className="mt-2 flex items-center space-x-3 p-2 text-xs">
+                {' '}
+                <div className="flex items-center">
+                  <HeartIcon className="h-5 w-5 text-miumee-color-500" />{' '}
+                  <span className="ml-1 font-semibold text-gray-700">
+                    {' '}
+                    {/* Slightly darker text for better readability */}
+                    Likes:
+                  </span>
+                  <span className="ml-1 text-miumee-color-600">
+                    {post.likes}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <EyeIcon className="h-5 w-5 text-miumee-color-500" />{' '}
+                  {/* Smaller icons */}
+                  <span className="ml-1 font-semibold text-gray-700">
+                    {' '}
+                    {/* Slightly darker text for better readability */}
+                    Views:
+                  </span>
+                  <span className="ml-1 text-miumee-color-600">
+                    {post.views}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
