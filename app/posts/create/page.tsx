@@ -1,6 +1,6 @@
 import Form from '@/app/ui/posts/create-form';
 import Breadcrumbs from '@/app/ui/posts/breadcrumbs';
-import { fetchUnlimitedViewStatus, fetchUserIdByNameEmail } from '@/app/lib/data';
+import { fetchUnlimitedViewStatus, fetchUserIdByNameEmail, fetchAllTags } from '@/app/lib/data';
 import { auth, signIn } from '@/auth';
 
 export default async function Page() {
@@ -16,6 +16,8 @@ export default async function Page() {
     String(userEmail),
   );
   console.log("getting user id from create page: " + userId, "userId type: ", typeof userId);
+  const tags = await fetchAllTags();
+  console.log('tags: ', tags);
 
   const unlimitedView = await fetchUnlimitedViewStatus(userId);
   return (

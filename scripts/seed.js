@@ -266,11 +266,57 @@ async function seedComments(client) {
   }
 }
 
+async function seedTags(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS tags (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        name TEXT NOT NULL UNIQUE
+      );
+    `;
+
+    console.log(`Created "tags" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding tags:', error);
+    throw error;
+  }
+}
+
+async function seedPostTags(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS post_tags (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        post_id UUID NOT NULL,
+        tag_id UUID NOT NULL
+      );
+    `;
+
+    console.log(`Created "post_tags" table`);
+
+    return {
+      createTable,
+    };
+  } catch (error) {
+    console.error('Error seeding post_tags:', error);
+    throw error;
+  }
+}
 
 async function main() {
   const client = await db.connect();
   //const seedviewres = await seedViewStatus(client);
   //const seedCommentsres = await seedComments(client);
+  //const seedTagsres = await seedTags(client);
+  //const seedPostTagsres = await seedPostTags(client);
 
   await client.end();
 }

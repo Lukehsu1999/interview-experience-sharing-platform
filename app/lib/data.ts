@@ -8,7 +8,8 @@ import {
   User,
   Revenue,
   PostsTable,
-  Comment
+  Comment,
+  Tag
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
@@ -560,5 +561,22 @@ export async function fetchMeetStatus(postId: string, seekerId: string) {
   } catch (error) {
     console.error('Failed to fetch meet status:', error);
     throw new Error('Failed to fetch meet status.');
+  }
+}
+
+export async function fetchAllTags() {
+  noStore();
+  try {
+    const alltags = await sql`
+      SELECT
+        *
+      FROM tags
+    `;
+    console.log('All tags fetched:', alltags.rows);
+    return alltags.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw error;
+    throw new Error('Failed to fetch all tags.');
   }
 }
