@@ -9,13 +9,15 @@ export default async function InvoicesTable({
   currentPage,
   viewer_id,
   unlimitedView,
+  sortMethod,
 }: {
   query: string;
   currentPage: number;
   viewer_id: string;
   unlimitedView: boolean;
+  sortMethod: string;
 }) {
-  const posts = await fetchFilteredPosts(query, currentPage);
+  const posts = await fetchFilteredPosts(query, currentPage, sortMethod);
 
   const statusColors = {
     'Full Time': 'bg-miumeeblue-500',

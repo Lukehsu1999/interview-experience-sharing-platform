@@ -1,5 +1,6 @@
-import { PencilIcon, PlusIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, PlusIcon, TrashIcon, EyeIcon, FireIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation'
 
 export function CreateInvoice() {
   return (
@@ -56,5 +57,27 @@ export function DeleteInvoice({ id }: { id: string }) {
         <TrashIcon className="w-5" />
       </button>
     </>
+  );
+}
+
+export function SortButtons({ currentSort }: { currentSort: string }){
+  return (
+    <div className="flex gap-2">
+      <Link
+        href={'?sort=hot&page=1'}
+        scroll={false}
+        className="flex h-10 items-center justify-center rounded-lg bg-miumee-color-500 px-4 text-sm font-medium text-white transition-colors hover:bg-miumee-color-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-miumee-color-500"
+      >
+        <FireIcon className="h-5 w-5 text-red-500 mr-2" />
+        HOT
+      </Link>
+      <Link
+        href={'?sort=new&page=1'} scroll={false}
+        className="flex h-10 items-center justify-center rounded-lg bg-miumee-color-500 px-4 text-sm font-medium text-white transition-colors hover:bg-miumee-color-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-miumee-color-500"
+      >
+        <SparklesIcon className="h-5 w-5 text-yellow-400 mr-2" />
+        NEW
+      </Link>
+    </div> 
   );
 }
