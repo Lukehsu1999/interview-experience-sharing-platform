@@ -7,10 +7,11 @@ import Image from 'next/image';
 import Demoblock from '@/app/ui/landingpage/demoblock';
 import PlatformCardWrapper from './ui/posts/platformStatsCards';
 import { CardsSkeleton } from '@/app/ui/skeletons';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 //maybe I will add session here
 
 export default function Page() {
+  
   return (
     <main className="flex min-h-screen flex-col bg-miumee-color-400 p-6">
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-miumee-color-500 p-4 md:h-52">
