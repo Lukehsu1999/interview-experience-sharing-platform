@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Script from "next/script";
 
-const GA_MEASUREMENT_ID =process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;; // Replace with your GA4 ID
+const GA_MEASUREMENT_ID ="G-2QZ0X38803"; // Replace with your GA4 ID
 
 export default function GoogleAnalytics() {
   const pathname = usePathname(); // Get current route
